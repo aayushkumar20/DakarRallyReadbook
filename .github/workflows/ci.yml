@@ -8,13 +8,9 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
 
 jobs:
   code-quality:
@@ -39,7 +35,7 @@ jobs:
   build-ipa:
     name: Build & Package iOS IPA
     needs: code-quality
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -79,26 +75,28 @@ jobs:
           path: build/DakarRallyApp.ipa
           retention-days: 30
 
+      - name: Create or Update GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref == 'refs/heads/main'
+        with:
+          tag_name: v1.0.0
+          name: "Dakar Rally Roadbook v1.0.0"
+          body: "Official Dakar Rally ERTF Unik4 & Digital Roadbook iOS IPA Release."
+          files: build/DakarRallyApp.ipa
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   deploy-pages:
     name: Deploy Web Companion to GitHub Pages
     needs: code-quality
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to GitHub Pages (gh-pages)
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: 'web'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./web

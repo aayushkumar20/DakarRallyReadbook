@@ -1,6 +1,13 @@
 # 🏁 Dakar Rally ERTF Unik4 & FIA Digital Roadbook Navigation System
 
+<p align="center">
+  <img src="web/icon-192.png" width="128" height="128" alt="Dakar Rally App Icon" style="border-radius: 24px;" />
+</p>
+
 An authentic replica of the **Dakar Rally ERTF Unik4 GPS Navigation Instrument Cluster** and the official **FIA Dakar Digital Roadbook (3-Column layout with Tulip diagrams, CAP bearings, FIA symbol lexicon, and co-driver biffage)**, built with Apple MapKit and CoreLocation.
+
+- 🌐 **Web Companion Live on GitHub Pages**: [https://aayushkumar20.github.io/DakarRallyReadbook/](https://aayushkumar20.github.io/DakarRallyReadbook/)
+- 📦 **Download iOS .ipa Binary**: Available under [GitHub Releases](https://github.com/aayushkumar20/DakarRallyReadbook/releases)
 
 ---
 
@@ -17,7 +24,7 @@ An authentic replica of the **Dakar Rally ERTF Unik4 GPS Navigation Instrument C
   - `V_MAX`: Maximum top speed reached.
   - `ETA FINISH`: Estimated arrival calculation.
 - **DZ-FZ Speed Control Zone**:
-  - Visual speed limit warning badge (`⚠️ MAX 50`).
+  - Visual speed limit warning badge (`⚠️ MAX 100`).
   - Automatic buzzer / sound alarm when overspeeding in DZ zones.
 - **Active Navigation Guidance**:
   - `CTW` (Cap to Waypoint): Bearing angle directly pointing to target waypoint.
@@ -40,7 +47,7 @@ An authentic replica of the **Dakar Rally ERTF Unik4 GPS Navigation Instrument C
 - **Column 3 — Notes & FIA Symbol Lexicon**:
   - Dangers: `!` (Danger 1), `!!` (Danger 2), `!!!` (Danger 3).
   - Downhill / uphill slope arrows.
-  - Speed limits: Red circle `30`, `50`, finish slash.
+  - Speed limits: Red circle `30`, `100`, finish slash.
   - Dakar terrain codes: `HP`, `SA`, `DN`, `DN L1`, `RIO`, `ORNI`, `OND`, `COMP`, `FOSS`, `PP`.
 - **Co-driver Biffage**:
   - Automatic diagonal strikethrough slash across passed and validated notes, identical to Dakar co-drivers.
@@ -75,12 +82,13 @@ An authentic replica of the **Dakar Rally ERTF Unik4 GPS Navigation Instrument C
 - `+0.10` / `-0.10`: Calibrates total odometer.
 - `NOTE +` / `NOTE -`: Advances or rewinds active roadbook note.
 
-### 6. Automated CI/CD & IPA Build Pipeline
+### 6. Automated CI/CD, IPA Build & Release Pipeline
 - GitHub Actions workflow (`.github/workflows/ci.yml`) automatically:
   - Validates code quality and syntax.
-  - Builds and archives the iOS application on macOS runners.
-  - Packages and exports the unsigned `.ipa` binary artifact for download.
-  - Deploys the interactive web companion directly to GitHub Pages.
+  - Builds and archives the iOS application on `macos-15` runner with Xcode 16.
+  - Packages and exports the unsigned `DakarRallyApp.ipa` binary artifact.
+  - Automatically attaches `DakarRallyApp.ipa` to GitHub Releases for direct download.
+  - Deploys the interactive web companion directly to GitHub Pages (`gh-pages`).
 
 ---
 
@@ -105,4 +113,4 @@ Run locally:
 python3 -m http.server 8088 --directory web
 ```
 Visit `http://localhost:8088`.
-When pushed to GitHub, the site is deployed directly to GitHub Pages.
+Live version is deployed at [https://aayushkumar20.github.io/DakarRallyReadbook/](https://aayushkumar20.github.io/DakarRallyReadbook/).

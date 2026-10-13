@@ -1034,7 +1034,7 @@ function generateRoadbookForCandidate(candidateIndex) {
     wptType: "START",
     wptName: "DSS 01",
     danger: 0,
-    speedLimit: 50,
+    speedLimit: 100,
     lexicon: ["START", "DZ", "PP"],
     text: "DEPART SS - FOLLOW TRACES",
     lat: coords[0][0],
@@ -1066,7 +1066,7 @@ function generateRoadbookForCandidate(candidateIndex) {
 
       if (step.name && (step.name.toLowerCase().includes("village") || step.name.toLowerCase().includes("avenue"))) {
         wptType = "DZ";
-        speedLim = 50;
+        speedLim = 100;
         lexList.push("DZ", "VIL");
       }
 

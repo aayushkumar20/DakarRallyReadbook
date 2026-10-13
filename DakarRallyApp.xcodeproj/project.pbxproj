@@ -22,6 +22,7 @@
 		974AF598A5148D7D399807B1 /* DakarRallyRoadbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C1BBEC20E53094CCCBFAF /* DakarRallyRoadbookApp.swift */; };
 		97745CCF12D8238EF5F3C0F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D907EDE00003F3B7B2CC32 /* ContentView.swift */; };
 		9C27D303CE5E6AB8CC70FE97 /* TulipVectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F95DA21568453F5AFBF89 /* TulipVectorView.swift */; };
+		AC24D49979742585C01AA6C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36D30530D731B279C4C626DC /* Assets.xcassets */; };
 		AE5D33083D4A7FF95876D499 /* AppleMapKitRouteEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFA0687C9199DA1065DAD1C /* AppleMapKitRouteEngine.swift */; };
 		BABC30216AA09074D372C6E2 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB44FDEFA0C961A996CC0BFB /* LocalizationManager.swift */; };
 		DAC333B72C59A9A73DB04098 /* AppleMapViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C724753D5548553B9661CA9 /* AppleMapViewRepresentable.swift */; };
@@ -34,6 +35,7 @@
 		291775EB380F2AEF18D79000 /* DakarRallyApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DakarRallyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C724753D5548553B9661CA9 /* AppleMapViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapViewRepresentable.swift; sourceTree = "<group>"; };
 		367673101A2D6C78A6D7BF6A /* Unik4GPSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unik4GPSView.swift; sourceTree = "<group>"; };
+		36D30530D731B279C4C626DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48BB479B0A68B9437283DBC8 /* FIALexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIALexicon.swift; sourceTree = "<group>"; };
 		4C1DD72DCF1846448328B788 /* DakarLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DakarLogoView.swift; sourceTree = "<group>"; };
 		524485D15A48BFCF5E6E1E85 /* FIASymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIASymbolView.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 		C12DBC951CD70C4830B633EE /* DakarRallyApp */ = {
 			isa = PBXGroup;
 			children = (
+				36D30530D731B279C4C626DC /* Assets.xcassets */,
 				940C1BBEC20E53094CCCBFAF /* DakarRallyRoadbookApp.swift */,
 				C91C7094216D179F639481AA /* Info.plist */,
 				77C1000F00E24B5DC131C695 /* Models */,
@@ -128,6 +131,7 @@
 			buildConfigurationList = 39E764054729BF58E5F345A8 /* Build configuration list for PBXNativeTarget "DakarRallyApp" */;
 			buildPhases = (
 				FE8A4D6CA0DC7A5F90C54C02 /* Sources */,
+				51E456E86B02346CFB828EC8 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -147,7 +151,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 				};
 			};
@@ -169,6 +173,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		51E456E86B02346CFB828EC8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC24D49979742585C01AA6C0 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FE8A4D6CA0DC7A5F90C54C02 /* Sources */ = {

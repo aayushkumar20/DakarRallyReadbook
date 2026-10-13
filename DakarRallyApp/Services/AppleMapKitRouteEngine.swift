@@ -73,7 +73,7 @@ public final class AppleMapKitRouteEngine {
             waypointType: .start,
             waypointCode: "DSS 01",
             danger: .none,
-            speedLimit: 50,
+            speedLimit: 100,
             lexiconCodes: ["START", "DZ", "PP"],
             textComment: "DEPART SS - FOLLOW TRACES",
             latitude: startCoord.latitude,
@@ -106,8 +106,8 @@ public final class AppleMapKitRouteEngine {
             var speedLim: Int? = nil
             if step.instructions.localizedCaseInsensitiveContains("village") || step.instructions.localizedCaseInsensitiveContains("town") {
                 wpType = .dz
-                wpCode = "DZ 50"
-                speedLim = 50
+                wpCode = "DZ 100"
+                speedLim = 100
                 lexiconList.append("DZ")
                 lexiconList.append("VIL")
             } else if noteCounter % 4 == 0 {

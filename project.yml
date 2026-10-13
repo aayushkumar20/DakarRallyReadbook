@@ -3,7 +3,8 @@ options:
   bundleIdPrefix: com.dakarrally
   deploymentTarget:
     iOS: 17.0
-  xcodeVersion: "16.0"
+  xcodeVersion: "15.0"
+  projectVersion: 56
 targets:
   DakarRallyApp:
     type: application
