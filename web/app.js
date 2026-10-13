@@ -887,6 +887,64 @@ function setupUIEventListeners() {
   document.getElementById('btnConfirmSelectedRoute').onclick = () => {
     generateRoadbookForCandidate(state.selectedCandidateIndex);
   };
+
+  setupAutocomplete('inputPointA', 'suggestPointA');
+  setupAutocomplete('inputPointB', 'suggestPointB');
+}
+
+function setupAutocomplete(inputId, dropdownId) {
+  const input = document.getElementById(inputId);
+  const dropdown = document.getElementById(dropdownId);
+  if (!input || !dropdown) return;
+  let debounceTimer = null;
+
+  input.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    const query = input.value.trim();
+    if (query.length < 2) {
+      dropdown.style.display = 'none';
+      dropdown.innerHTML = '';
+      return;
+    }
+    debounceTimer = setTimeout(async () => {
+      try {
+        const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=5`);
+        const data = await res.json();
+        dropdown.innerHTML = '';
+        if (data && data.length) {
+          data.forEach(item => {
+            const row = document.createElement('div');
+            row.className = 'autocomplete-item';
+            const parts = item.display_name.split(',');
+            const mainTitle = parts[0];
+            const subTitle = parts.slice(1, 3).join(', ');
+            row.innerHTML = `
+              <span>📍</span>
+              <span class="autocomplete-item-title">${mainTitle}</span>
+              <span class="autocomplete-item-sub">${subTitle}</span>
+            `;
+            row.onclick = () => {
+              input.value = item.display_name;
+              dropdown.style.display = 'none';
+              dropdown.innerHTML = '';
+            };
+            dropdown.appendChild(row);
+          });
+          dropdown.style.display = 'block';
+        } else {
+          dropdown.style.display = 'none';
+        }
+      } catch (e) {
+        dropdown.style.display = 'none';
+      }
+    }, 250);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.style.display = 'none';
+    }
+  });
 }
 
 function switchMapLayer(layerName, btnId) {

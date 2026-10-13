@@ -1,21 +1,32 @@
 import SwiftUI
 import MapKit
+
 public struct RoutePlannerSheet: View {
     @ObservedObject var locationService: LocationService
     @Binding var polylineCoordinates: [CLLocationCoordinate2D]
     @Environment(\.dismiss) var dismiss
-    @State private var fromQuery: String = ""
-    @State private var toQuery: String = ""
+    
+    @StateObject private var fromCompleter = LocationSearchCompleter()
+    @StateObject private var toCompleter = LocationSearchCompleter()
+    @FocusState private var activeField: PlannerSearchField?
+    
     @State private var isCalculating: Bool = false
     @State private var errorMessage: String? = nil
     @State private var availableRoutes: [RallyRouteOption] = []
     @State private var selectedRouteIndex: Int = 0
     @State private var resolvedSourceCoord: CLLocationCoordinate2D? = nil
     @State private var resolvedDestCoord: CLLocationCoordinate2D? = nil
+    
+    enum PlannerSearchField: Hashable {
+        case from
+        case to
+    }
+    
     public init(locationService: LocationService, polylineCoordinates: Binding<[CLLocationCoordinate2D]>) {
         self.locationService = locationService
         self._polylineCoordinates = polylineCoordinates
     }
+    
     public var body: some View {
         NavigationView {
             Form {
@@ -23,12 +34,80 @@ public struct RoutePlannerSheet: View {
                     HStack {
                         Image(systemName: "circle.circle.fill")
                             .foregroundColor(.green)
-                        TextField("Point A (Departure or empty for GPS)", text: $fromQuery)
+                        TextField("Point A (Departure or empty for GPS)", text: $fromCompleter.query)
+                            .focused($activeField, equals: .from)
+                        if !fromCompleter.query.isEmpty {
+                            Button(action: {
+                                fromCompleter.query = ""
+                                fromCompleter.clearSuggestions()
+                                resolvedSourceCoord = nil
+                            }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                    }
+                    if activeField == .from && !fromCompleter.suggestions.isEmpty {
+                        ForEach(fromCompleter.suggestions.prefix(4)) { item in
+                            Button(action: {
+                                selectFromSuggestion(item)
+                            }) {
+                                HStack(spacing: 8) {
+                                    Image(systemName: "mappin.circle.fill")
+                                        .foregroundColor(.green)
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(item.title)
+                                            .font(.system(size: 13, weight: .bold))
+                                            .foregroundColor(.primary)
+                                        if !item.subtitle.isEmpty {
+                                            Text(item.subtitle)
+                                                .font(.system(size: 11))
+                                                .foregroundColor(.secondary)
+                                        }
+                                    }
+                                }
+                                .padding(.vertical, 2)
+                            }
+                        }
                     }
                     HStack {
                         Image(systemName: "mappin.circle.fill")
                             .foregroundColor(.red)
-                        TextField("Point B (Destination)", text: $toQuery)
+                        TextField("Point B (Destination)", text: $toCompleter.query)
+                            .focused($activeField, equals: .to)
+                        if !toCompleter.query.isEmpty {
+                            Button(action: {
+                                toCompleter.query = ""
+                                toCompleter.clearSuggestions()
+                                resolvedDestCoord = nil
+                            }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                    }
+                    if activeField == .to && !toCompleter.suggestions.isEmpty {
+                        ForEach(toCompleter.suggestions.prefix(4)) { item in
+                            Button(action: {
+                                selectToSuggestion(item)
+                            }) {
+                                HStack(spacing: 8) {
+                                    Image(systemName: "mappin.circle.fill")
+                                        .foregroundColor(.red)
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(item.title)
+                                            .font(.system(size: 13, weight: .bold))
+                                            .foregroundColor(.primary)
+                                        if !item.subtitle.isEmpty {
+                                            Text(item.subtitle)
+                                                .font(.system(size: 11))
+                                                .foregroundColor(.secondary)
+                                        }
+                                    }
+                                }
+                                .padding(.vertical, 2)
+                            }
+                        }
                     }
                     Button(action: findAlternativeRoutes) {
                         HStack {
@@ -46,7 +125,7 @@ public struct RoutePlannerSheet: View {
                         .background(Color.blue)
                         .cornerRadius(8)
                     }
-                    .disabled(isCalculating || toQuery.trimmingCharacters(in: .whitespaces).isEmpty)
+                    .disabled(isCalculating || toCompleter.query.trimmingCharacters(in: .whitespaces).isEmpty)
                 }
                 if !availableRoutes.isEmpty {
                     Section(header: Text("SELECT PREFERRED ROUTE (ALTERNATE PATHS)")) {
@@ -131,28 +210,64 @@ public struct RoutePlannerSheet: View {
             .navigationBarItems(trailing: Button("Done") { dismiss() })
         }
     }
+    private func selectFromSuggestion(_ item: LocationSuggestionItem) {
+        fromCompleter.query = item.title
+        fromCompleter.clearSuggestions()
+        activeField = nil
+        Task {
+            if let coord = try? await fromCompleter.resolveCoordinate(for: item) {
+                await MainActor.run {
+                    self.resolvedSourceCoord = coord
+                }
+            }
+        }
+    }
+    private func selectToSuggestion(_ item: LocationSuggestionItem) {
+        toCompleter.query = item.title
+        toCompleter.clearSuggestions()
+        activeField = nil
+        Task {
+            if let coord = try? await toCompleter.resolveCoordinate(for: item) {
+                await MainActor.run {
+                    self.resolvedDestCoord = coord
+                }
+            }
+        }
+    }
     private func findAlternativeRoutes() {
         isCalculating = true
         errorMessage = nil
         availableRoutes = []
+        activeField = nil
+        fromCompleter.clearSuggestions()
+        toCompleter.clearSuggestions()
         Task {
             do {
-                var sourceCoord = CLLocationCoordinate2D(latitude: locationService.telemetry.currentLatitude, longitude: locationService.telemetry.currentLongitude)
-                if !fromQuery.trimmingCharacters(in: .whitespaces).isEmpty && fromQuery.lowercased() != "current location" {
-                    let fromItems = try await AppleMapKitRouteEngine.shared.searchLocation(query: fromQuery)
+                var sourceCoord = resolvedSourceCoord ?? CLLocationCoordinate2D(latitude: locationService.telemetry.currentLatitude, longitude: locationService.telemetry.currentLongitude)
+                let fromText = fromCompleter.query.trimmingCharacters(in: .whitespaces)
+                if resolvedSourceCoord == nil && !fromText.isEmpty && fromText.lowercased() != "current location" {
+                    let fromItems = try await AppleMapKitRouteEngine.shared.searchLocation(query: fromText)
                     guard let first = fromItems.first?.placemark.coordinate else {
-                        throw NSError(domain: "Planner", code: 404, userInfo: [NSLocalizedDescriptionKey: "Could not find Point A: \(fromQuery)"])
+                        throw NSError(domain: "Planner", code: 404, userInfo: [NSLocalizedDescriptionKey: "Could not find Point A: \(fromText)"])
                     }
                     sourceCoord = first
                 }
-                let toItems = try await AppleMapKitRouteEngine.shared.searchLocation(query: toQuery)
-                guard let destCoord = toItems.first?.placemark.coordinate else {
-                    throw NSError(domain: "Planner", code: 404, userInfo: [NSLocalizedDescriptionKey: "Could not find Point B: \(toQuery)"])
+                var destCoord = resolvedDestCoord
+                let toText = toCompleter.query.trimmingCharacters(in: .whitespaces)
+                if destCoord == nil {
+                    let toItems = try await AppleMapKitRouteEngine.shared.searchLocation(query: toText)
+                    guard let first = toItems.first?.placemark.coordinate else {
+                        throw NSError(domain: "Planner", code: 404, userInfo: [NSLocalizedDescriptionKey: "Could not find Point B: \(toText)"])
+                    }
+                    destCoord = first
                 }
-                let options = try await AppleMapKitRouteEngine.shared.calculateAlternativeRoutes(from: sourceCoord, to: destCoord)
+                guard let finalDest = destCoord else {
+                    throw NSError(domain: "Planner", code: 404, userInfo: [NSLocalizedDescriptionKey: "Please enter a valid destination."])
+                }
+                let options = try await AppleMapKitRouteEngine.shared.calculateAlternativeRoutes(from: sourceCoord, to: finalDest)
                 await MainActor.run {
                     self.resolvedSourceCoord = sourceCoord
-                    self.resolvedDestCoord = destCoord
+                    self.resolvedDestCoord = finalDest
                     self.availableRoutes = options
                     self.selectedRouteIndex = 0
                     self.isCalculating = false
@@ -170,8 +285,8 @@ public struct RoutePlannerSheet: View {
         isCalculating = true
         Task {
             do {
-                let fromTitle = fromQuery.isEmpty ? "CURRENT GPS" : fromQuery.uppercased()
-                let toTitle = toQuery.uppercased()
+                let fromTitle = fromCompleter.query.isEmpty ? "CURRENT GPS" : fromCompleter.query.uppercased()
+                let toTitle = toCompleter.query.uppercased()
                 let (generatedStage, coords) = try await AppleMapKitRouteEngine.shared.generateRoadbook(
                     from: source,
                     to: dest,

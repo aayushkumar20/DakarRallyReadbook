@@ -282,13 +282,15 @@
           <p class="modal-desc" id="txtRouteModalDesc">Calculate shortest rally raid roadbook navigation for ANY Point A to Point B worldwide with alternative route paths.</p>
           
           <div class="input-form">
-            <div class="input-row">
+            <div class="input-row autocomplete-container">
               <label id="lblPointA">Point A (Departure):</label>
-              <input type="text" id="inputPointA" value="" placeholder="Search address, city, or coordinates..." />
+              <input type="text" id="inputPointA" value="" placeholder="Search address, city, or coordinates..." autocomplete="off" />
+              <div id="suggestPointA" class="autocomplete-dropdown" style="display: none;"></div>
             </div>
-            <div class="input-row">
+            <div class="input-row autocomplete-container">
               <label id="lblPointB">Point B (Destination):</label>
-              <input type="text" id="inputPointB" value="" placeholder="Search destination..." />
+              <input type="text" id="inputPointB" value="" placeholder="Search destination..." autocomplete="off" />
+              <div id="suggestPointB" class="autocomplete-dropdown" style="display: none;"></div>
             </div>
             <button class="btn-primary" id="btnCalculateRoute">⚡ FIND ALTERNATIVE ROUTES</button>
           </div>
