@@ -1,0 +1,370 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		075429B1B40CA81FF11B7EB2 /* FIASymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524485D15A48BFCF5E6E1E85 /* FIASymbolView.swift */; };
+		25C4AC2E23D72111A50FC6B0 /* RoutePlannerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27B16A78D50DD99DAE91409 /* RoutePlannerSheet.swift */; };
+		2B32E223241260A2ADB7550D /* Unik4GPSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367673101A2D6C78A6D7BF6A /* Unik4GPSView.swift */; };
+		3925B4CB52394BD5FF8D7B7B /* DakarModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28338078A38B7BF68CCA215F /* DakarModels.swift */; };
+		46DE9F470014F5E904FA3CBD /* RemoteControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8E297042840AB8190E2091 /* RemoteControlView.swift */; };
+		4A6A6BCB872273B07BF2BA7C /* SoundEffectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAD39AFAEA06F054A768B90 /* SoundEffectManager.swift */; };
+		4E59BFC6F9D63CE2808B3913 /* LexiconReferenceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E104AF576EB304B51C991DE2 /* LexiconReferenceSheet.swift */; };
+		778DFCDF8411D01600B4A97D /* FIALexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB479B0A68B9437283DBC8 /* FIALexicon.swift */; };
+		8229216E80E29CD86A360C6E /* RoadbookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6684F11EDA171AE4ABA25F /* RoadbookListView.swift */; };
+		974AF598A5148D7D399807B1 /* DakarRallyRoadbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C1BBEC20E53094CCCBFAF /* DakarRallyRoadbookApp.swift */; };
+		97745CCF12D8238EF5F3C0F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D907EDE00003F3B7B2CC32 /* ContentView.swift */; };
+		9C27D303CE5E6AB8CC70FE97 /* TulipVectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F95DA21568453F5AFBF89 /* TulipVectorView.swift */; };
+		AE5D33083D4A7FF95876D499 /* AppleMapKitRouteEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFA0687C9199DA1065DAD1C /* AppleMapKitRouteEngine.swift */; };
+		DAC333B72C59A9A73DB04098 /* AppleMapViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C724753D5548553B9661CA9 /* AppleMapViewRepresentable.swift */; };
+		DDFBCAE8A9D980378F46EE0A /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B49CAF505BF3E1D1437AE54 /* LocationService.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1A6684F11EDA171AE4ABA25F /* RoadbookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadbookListView.swift; sourceTree = "<group>"; };
+		28338078A38B7BF68CCA215F /* DakarModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DakarModels.swift; sourceTree = "<group>"; };
+		291775EB380F2AEF18D79000 /* DakarRallyApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DakarRallyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C724753D5548553B9661CA9 /* AppleMapViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapViewRepresentable.swift; sourceTree = "<group>"; };
+		367673101A2D6C78A6D7BF6A /* Unik4GPSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unik4GPSView.swift; sourceTree = "<group>"; };
+		48BB479B0A68B9437283DBC8 /* FIALexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIALexicon.swift; sourceTree = "<group>"; };
+		524485D15A48BFCF5E6E1E85 /* FIASymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIASymbolView.swift; sourceTree = "<group>"; };
+		66D907EDE00003F3B7B2CC32 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6AFA0687C9199DA1065DAD1C /* AppleMapKitRouteEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapKitRouteEngine.swift; sourceTree = "<group>"; };
+		7B49CAF505BF3E1D1437AE54 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		8FAD39AFAEA06F054A768B90 /* SoundEffectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundEffectManager.swift; sourceTree = "<group>"; };
+		940C1BBEC20E53094CCCBFAF /* DakarRallyRoadbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DakarRallyRoadbookApp.swift; sourceTree = "<group>"; };
+		C27B16A78D50DD99DAE91409 /* RoutePlannerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutePlannerSheet.swift; sourceTree = "<group>"; };
+		C91C7094216D179F639481AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CD8E297042840AB8190E2091 /* RemoteControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteControlView.swift; sourceTree = "<group>"; };
+		E104AF576EB304B51C991DE2 /* LexiconReferenceSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexiconReferenceSheet.swift; sourceTree = "<group>"; };
+		FB8F95DA21568453F5AFBF89 /* TulipVectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TulipVectorView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		019919292E0A6AC01765623E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				6AFA0687C9199DA1065DAD1C /* AppleMapKitRouteEngine.swift */,
+				7B49CAF505BF3E1D1437AE54 /* LocationService.swift */,
+				8FAD39AFAEA06F054A768B90 /* SoundEffectManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		77C1000F00E24B5DC131C695 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				28338078A38B7BF68CCA215F /* DakarModels.swift */,
+				48BB479B0A68B9437283DBC8 /* FIALexicon.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B4FE52C1C5A03C20E4221D5C = {
+			isa = PBXGroup;
+			children = (
+				C12DBC951CD70C4830B633EE /* DakarRallyApp */,
+				E722C3BBA572C440046DB498 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C12DBC951CD70C4830B633EE /* DakarRallyApp */ = {
+			isa = PBXGroup;
+			children = (
+				940C1BBEC20E53094CCCBFAF /* DakarRallyRoadbookApp.swift */,
+				C91C7094216D179F639481AA /* Info.plist */,
+				77C1000F00E24B5DC131C695 /* Models */,
+				019919292E0A6AC01765623E /* Services */,
+				DB975DEE11A34A627892CAF6 /* Views */,
+			);
+			path = DakarRallyApp;
+			sourceTree = "<group>";
+		};
+		DB975DEE11A34A627892CAF6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C724753D5548553B9661CA9 /* AppleMapViewRepresentable.swift */,
+				66D907EDE00003F3B7B2CC32 /* ContentView.swift */,
+				524485D15A48BFCF5E6E1E85 /* FIASymbolView.swift */,
+				E104AF576EB304B51C991DE2 /* LexiconReferenceSheet.swift */,
+				CD8E297042840AB8190E2091 /* RemoteControlView.swift */,
+				1A6684F11EDA171AE4ABA25F /* RoadbookListView.swift */,
+				C27B16A78D50DD99DAE91409 /* RoutePlannerSheet.swift */,
+				FB8F95DA21568453F5AFBF89 /* TulipVectorView.swift */,
+				367673101A2D6C78A6D7BF6A /* Unik4GPSView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E722C3BBA572C440046DB498 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				291775EB380F2AEF18D79000 /* DakarRallyApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		81F4CB99EEAE332B7388A350 /* DakarRallyApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 39E764054729BF58E5F345A8 /* Build configuration list for PBXNativeTarget "DakarRallyApp" */;
+			buildPhases = (
+				FE8A4D6CA0DC7A5F90C54C02 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DakarRallyApp;
+			packageProductDependencies = (
+			);
+			productName = DakarRallyApp;
+			productReference = 291775EB380F2AEF18D79000 /* DakarRallyApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		672B816A54E1FBE3413928A6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 3B322F03B65847135C0CA445 /* Build configuration list for PBXProject "DakarRallyApp" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = B4FE52C1C5A03C20E4221D5C;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = E722C3BBA572C440046DB498 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				81F4CB99EEAE332B7388A350 /* DakarRallyApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FE8A4D6CA0DC7A5F90C54C02 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE5D33083D4A7FF95876D499 /* AppleMapKitRouteEngine.swift in Sources */,
+				DAC333B72C59A9A73DB04098 /* AppleMapViewRepresentable.swift in Sources */,
+				97745CCF12D8238EF5F3C0F8 /* ContentView.swift in Sources */,
+				3925B4CB52394BD5FF8D7B7B /* DakarModels.swift in Sources */,
+				974AF598A5148D7D399807B1 /* DakarRallyRoadbookApp.swift in Sources */,
+				778DFCDF8411D01600B4A97D /* FIALexicon.swift in Sources */,
+				075429B1B40CA81FF11B7EB2 /* FIASymbolView.swift in Sources */,
+				4E59BFC6F9D63CE2808B3913 /* LexiconReferenceSheet.swift in Sources */,
+				DDFBCAE8A9D980378F46EE0A /* LocationService.swift in Sources */,
+				46DE9F470014F5E904FA3CBD /* RemoteControlView.swift in Sources */,
+				8229216E80E29CD86A360C6E /* RoadbookListView.swift in Sources */,
+				25C4AC2E23D72111A50FC6B0 /* RoutePlannerSheet.swift in Sources */,
+				4A6A6BCB872273B07BF2BA7C /* SoundEffectManager.swift in Sources */,
+				9C27D303CE5E6AB8CC70FE97 /* TulipVectorView.swift in Sources */,
+				2B32E223241260A2ADB7550D /* Unik4GPSView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		47AB03DA62ED9873790BCB60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		70327D22C01442F77A14615E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = DakarRallyApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dakarrally.roadbook;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E098C9E70D4753B88B32ABDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		FB158F9C7C6D81CFC9873EC2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = DakarRallyApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dakarrally.roadbook;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		39E764054729BF58E5F345A8 /* Build configuration list for PBXNativeTarget "DakarRallyApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70327D22C01442F77A14615E /* Debug */,
+				FB158F9C7C6D81CFC9873EC2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		3B322F03B65847135C0CA445 /* Build configuration list for PBXProject "DakarRallyApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47AB03DA62ED9873790BCB60 /* Debug */,
+				E098C9E70D4753B88B32ABDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 672B816A54E1FBE3413928A6 /* Project object */;
+}

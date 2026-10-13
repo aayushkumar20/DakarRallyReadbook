@@ -1,0 +1,34 @@
+name: DakarRallyApp
+options:
+  bundleIdPrefix: com.dakarrally
+  deploymentTarget:
+    iOS: 17.0
+  xcodeVersion: "16.0"
+targets:
+  DakarRallyApp:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - DakarRallyApp
+    info:
+      path: DakarRallyApp/Info.plist
+      properties:
+        CFBundleDisplayName: "Dakar Roadbook"
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        UILaunchStoryboardName: LaunchScreen
+        UIRequiresFullScreen: true
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        NSLocationWhenInUseUsageDescription: "Dakar Rally Roadbook requires your precise GPS location for rally odometer calculation, waypoint biffage, and heading navigation."
+        NSLocationAlwaysAndWhenInUseUsageDescription: "Dakar Rally Roadbook requires continuous location tracking during rally raid stages."
+        NSMotionUsageDescription: "Used to determine vehicle pitch, roll, and elevation inclination."
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.dakarrally.roadbook
+      SWIFT_VERSION: "5.9"
+      ENABLE_PREVIEWS: YES
+      ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+      GENERATE_INFOPLIST_FILE: NO
