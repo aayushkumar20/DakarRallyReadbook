@@ -13,7 +13,7 @@ public struct AppleMapViewRepresentable: UIViewRepresentable {
         Coordinator(self)
     }
     public func makeUIView(context: Context) -> MKMapView {
-        let mapView = MKMapView()
+        let mapView = MKMapView(frame: UIScreen.main.bounds)
         mapView.delegate = context.coordinator
         mapView.mapType = mapType
         mapView.showsUserLocation = false

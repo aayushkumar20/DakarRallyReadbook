@@ -33,3 +33,11 @@ targets:
       ENABLE_PREVIEWS: YES
       ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
       GENERATE_INFOPLIST_FILE: NO
+schemes:
+  DakarRallyApp:
+    build:
+      targets:
+        DakarRallyApp: all
+    run:
+      environmentVariables:
+        OS_ACTIVITY_MODE: disable
