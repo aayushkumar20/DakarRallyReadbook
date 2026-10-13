@@ -1,5 +1,4 @@
 import SwiftUI
-
 @main
 struct DakarRallyRoadbookApp: App {
     var body: some Scene {

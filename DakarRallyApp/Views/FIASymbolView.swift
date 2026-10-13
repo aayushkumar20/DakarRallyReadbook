@@ -1,12 +1,10 @@
 import SwiftUI
-
 public struct FIASymbolView: View {
     public let danger: DangerLevel
     public let speedLimit: Int?
     public let waypointType: WaypointType?
     public let lexiconCodes: [String]
     public let textComment: String
-    
     public init(
         danger: DangerLevel = .none,
         speedLimit: Int? = nil,
@@ -20,17 +18,12 @@ public struct FIASymbolView: View {
         self.lexiconCodes = lexiconCodes
         self.textComment = textComment
     }
-    
     public var body: some View {
         VStack(alignment: .leading, spacing: 3) {
-            // Top row: Waypoint type icon & Danger symbols
             HStack(spacing: 5) {
-                // Waypoint Stamp
                 if let wp = waypointType {
                     waypointBadge(for: wp)
                 }
-                
-                // Speed Limit Badge (DZ / FZ)
                 if let limit = speedLimit {
                     ZStack {
                         Circle()
@@ -42,8 +35,6 @@ public struct FIASymbolView: View {
                             .foregroundColor(.black)
                     }
                 }
-                
-                // Dangers ! / !! / !!!
                 if danger != .none {
                     HStack(spacing: 1) {
                         ForEach(0..<danger.rawValue, id: \.self) { _ in
@@ -53,8 +44,6 @@ public struct FIASymbolView: View {
                         }
                     }
                 }
-                
-                // Graphical symbol icons matching screenshots 2, 3, 4
                 if lexiconCodes.contains("OND") {
                     FIASymbolIcons.UndulationIcon()
                 }
@@ -70,11 +59,11 @@ public struct FIASymbolView: View {
                 if lexiconCodes.contains("FOSS") {
                     FIASymbolIcons.DitchIcon()
                 }
-                
+                if lexiconCodes.contains("DOWNHILL") || lexiconCodes.contains("DESCENTE") {
+                    FIASymbolIcons.DownhillArrowIcon()
+                }
                 Spacer()
             }
-            
-            // Middle row: FIA Lexicon Acronyms
             if !filteredCodes.isEmpty {
                 HStack(spacing: 3) {
                     ForEach(filteredCodes, id: \.self) { code in
@@ -88,8 +77,6 @@ public struct FIASymbolView: View {
                     }
                 }
             }
-            
-            // Bottom row: Textual co-driver notes / instructions
             if !textComment.isEmpty {
                 Text(textComment)
                     .font(.system(size: 9.5, weight: .bold))
@@ -97,14 +84,12 @@ public struct FIASymbolView: View {
                     .lineLimit(2)
                     .textCase(.uppercase)
             }
-            
             Spacer()
         }
         .padding(4)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color.white)
     }
-    
     private var filteredCodes: [String] {
         lexiconCodes.filter {
             $0 != "!" && $0 != "!!" && $0 != "!!!" &&
@@ -112,7 +97,6 @@ public struct FIASymbolView: View {
             $0 != "OND" && $0 != "ORNI" && $0 != "COMP" && $0 != "DIP" && $0 != "FOSS"
         }
     }
-    
     @ViewBuilder
     private func waypointBadge(for wp: WaypointType) -> some View {
         switch wp {
@@ -162,7 +146,6 @@ public struct FIASymbolView: View {
             EmptyView()
         }
     }
-    
     private func backgroundColor(for code: String) -> Color {
         switch code.uppercased() {
         case "HP": return Color.orange.opacity(0.3)

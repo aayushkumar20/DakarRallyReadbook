@@ -5,30 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Dakar Rally ERTF Unik4 & Digital Roadbook</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Leaflet for Satellite & MapKit style vector navigation -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <!-- Google Fonts: Orbitron & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;600;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="app-container">
-    <!-- Top Cockpit Navigation Bar -->
     <header class="cockpit-header">
       <div class="brand">
-        <!-- Official Dakar Tuareg Silhouette Logo -->
         <svg class="dakar-tuareg-logo" width="34" height="34" viewBox="0 0 100 100" fill="none">
           <path d="M50 5 C75 5 88 15 85 28 C82 40 80 55 72 65 C75 75 85 85 88 95 L12 95 C15 85 25 75 28 65 C20 55 18 40 15 28 C12 15 25 5 50 5 Z" fill="#FFE500"/>
-          <!-- Eyes cut -->
           <polygon points="32,40 68,40 65,47 35,47" fill="#000"/>
-          <!-- Veil folds -->
           <path d="M30 57 Q50 64 70 57" stroke="#000" stroke-width="3" fill="none"/>
           <path d="M25 74 Q50 82 75 74" stroke="#000" stroke-width="3" fill="none"/>
         </svg>
-        <span class="brand-title">DAKAR RALLY</span>
-        <span class="cert-tag">FIA 2025</span>
+        <span class="brand-title" id="txtBrandTitle">DAKAR RALLY</span>
+        <span class="cert-tag" id="txtCertTag">FIA RALLYE RAID</span>
       </div>
 
       <div class="mode-selector">
@@ -39,6 +33,9 @@
       </div>
 
       <div class="header-actions">
+        <button class="action-btn lang-btn" id="btnOpenLanguageModal" title="Select Language">
+          🌐 <span id="currentLangLabel">EN</span>
+        </button>
         <button class="action-btn route-btn" id="btnOpenPlanner" title="Route Planner (Point A to B)">
           🗺️ ROUTE A ➔ B
         </button>
@@ -51,10 +48,9 @@
       </div>
     </header>
 
-    <!-- Simulation Banner -->
     <div class="sim-banner" id="simBanner" style="display: none;">
       <span class="pulse-dot"></span>
-      <span class="sim-text" id="simBannerText">RACE SIMULATION ACTIVE — 84 KM/H</span>
+      <span class="sim-text" id="simBannerText">RACE SIMULATION ACTIVE</span>
       <div class="sim-controls">
         <button class="sim-speed-btn" data-speed="1">1X</button>
         <button class="sim-speed-btn active" data-speed="2">2X</button>
@@ -63,123 +59,131 @@
       </div>
     </div>
 
-    <!-- Main Dynamic Workspace -->
     <main class="main-workspace" id="mainWorkspace">
       
-      <!-- LEFT / TOP: ERTF UNIK4 GPS DEVICE (Exact Screenshot 1 Replica) -->
       <section class="device-section" id="unik4Section">
         <div class="unik4-hardware-frame">
           <div class="hardware-top-plate">
-            <span class="device-label">🇫🇷 MEMO GPS UNIK4 RALLYE RAID – VERSION 2024</span>
+            <span class="device-label">MEMO GPS UNIK4 RALLYE RAID</span>
             <span class="category-label">AUTO/CAMION</span>
             <div class="power-led" id="powerLed" title="GPS Lock Status"></div>
           </div>
 
-          <!-- UNIK4 SCREEN (Exact layout from Screenshot 1) -->
           <div class="unik4-screen">
             
-            <!-- Row 1: Status bar -->
             <div class="screen-row status-bar">
               <div class="sat-power">
                 <span class="sat-bell" id="satBell" title="Satellite Bell">🔔</span>
                 <span class="pwr-plug" title="Vehicle Battery Feed">🔌</span>
               </div>
 
-              <div class="speed-box">
-                <span class="tiny-label">Vitesse</span>
+              <div class="speed-box" id="btnToggleSpeedUnit" title="Click to toggle km/h and mph" style="cursor: pointer;">
+                <span class="tiny-label" id="lblSpeed">Vitesse ⇄</span>
                 <div class="speed-num-row">
-                  <span class="speed-num" id="telemetrySpeed">78</span>
-                  <span class="unit">km/h</span>
+                  <span class="speed-num" id="telemetrySpeed">0</span>
+                  <span class="unit" id="telemetrySpeedUnit">km/h</span>
                 </div>
               </div>
 
               <div class="validated-box">
                 <div class="val-count-row">
-                  <span class="val-num" id="telemetryValidated">12</span>
+                  <span class="val-num" id="telemetryValidated">0</span>
                   <span class="val-icon">🟩</span>
                 </div>
-                <span class="tiny-sub">VALIDÉS</span>
+                <span class="tiny-sub" id="lblValidated">VALIDÉS</span>
               </div>
 
               <div class="target-wpt-box">
                 <div class="wpt-id-row">
-                  <span class="wpt-prefix">WPT <strong id="telemetryWptNum">13</strong></span>
-                  <span class="wpt-name" id="telemetryWptName">B1</span>
+                  <span class="wpt-prefix">WPT <strong id="telemetryWptNum">--</strong></span>
+                  <span class="wpt-name" id="telemetryWptName">--</span>
                 </div>
-                <span class="tiny-sub">POINT VISÉ</span>
+                <span class="tiny-sub" id="lblTargetWpt">POINT VISÉ</span>
               </div>
 
               <div class="cap-suivi-box">
                 <div class="cap-badge">
-                  <span class="cap-num" id="telemetryHeading">94°</span>
+                  <span class="cap-num" id="telemetryHeading">0°</span>
                 </div>
-                <span class="cap-label">CAP GPS</span>
+                <span class="cap-label" id="lblCapGps">CAP GPS</span>
               </div>
             </div>
 
-            <!-- Row 2: Large Odometers (ODO Total & ODO Partiel) -->
             <div class="screen-row odo-bar">
               <div class="odo-col total-col">
-                <span class="odo-tag">ODO total</span>
-                <div class="odo-display" id="telemetryOdoTotal">29.82</div>
+                <span class="odo-tag" id="lblOdoTotal">ODO total</span>
+                <div class="odo-display" id="telemetryOdoTotal">0.00</div>
               </div>
               <div class="odo-col partiel-col">
                 <div class="partiel-head">
-                  <span class="odo-tag">ODO partiel</span>
+                  <span class="odo-tag" id="lblOdoPartiel">ODO partiel</span>
                   <button class="rst-pill" id="btnQuickRst" title="Reset Partial Odometer">RST</button>
                 </div>
-                <div class="odo-display" id="telemetryOdoPartiel">0.71</div>
+                <div class="odo-display" id="telemetryOdoPartiel">0.00</div>
               </div>
             </div>
 
-            <!-- Row 3: DZ-FZ Speed Zone & Waypoint Guidance (Screenshot 1 Bottom) -->
+            <div class="screen-row chrono-bar">
+              <div class="chrono-item">
+                <span class="chrono-tag" id="lblChrono">CHRONO</span>
+                <span class="chrono-val" id="telemetryChrono">00:00:00</span>
+              </div>
+              <div class="chrono-item">
+                <span class="chrono-tag" id="lblAvgSpeed">V_MOY</span>
+                <span class="chrono-val highlight" id="telemetryAvgSpeed">0.0 km/h</span>
+              </div>
+              <div class="chrono-item">
+                <span class="chrono-tag" id="lblMaxSpeed">V_MAX</span>
+                <span class="chrono-val" id="telemetryMaxSpeed">0 km/h</span>
+              </div>
+              <div class="chrono-item">
+                <span class="chrono-tag" id="lblEta">ETA FINISH</span>
+                <span class="chrono-val eta-color" id="telemetryEta">--:--:--</span>
+              </div>
+            </div>
+
             <div class="screen-row guidance-bar" id="guidanceBar">
-              <!-- Speed Zone Alert (e.g. 48 / 50 triangle) -->
               <div class="speed-zone-alert" id="speedZoneAlert" style="display: none;">
                 <span class="alert-triangle">⚠️</span>
                 <div class="zone-nums">
-                  <span class="cur-zone-speed" id="zoneCurSpeed">48</span>
+                  <span class="cur-zone-speed" id="zoneCurSpeed">0</span>
                   <span class="max-zone-limit" id="zoneMaxLimit">MAX 50</span>
                 </div>
               </div>
 
-              <!-- CTW Steering Arrow & Angle -->
               <div class="ctw-guidance">
-                <div class="steering-arrow" id="steeringArrow" style="transform: rotate(5deg);">➔</div>
+                <div class="steering-arrow" id="steeringArrow" style="transform: rotate(0deg);">➔</div>
                 <div class="ctw-info">
-                  <span class="tiny-label">CTW (Cap visé)</span>
-                  <span class="ctw-angle" id="telemetryCtw">32°</span>
+                  <span class="tiny-label" id="lblCtw">CTW (Cap visé)</span>
+                  <span class="ctw-angle" id="telemetryCtw">0°</span>
                 </div>
               </div>
 
-              <!-- DTW Distance to Waypoint -->
               <div class="dtw-box">
-                <span class="tiny-label">DTW (Distance)</span>
+                <span class="tiny-label" id="lblDtw">DTW (Distance)</span>
                 <div class="dtw-num-row">
-                  <span class="dtw-num" id="telemetryDtw">0.11</span>
+                  <span class="dtw-num" id="telemetryDtw">0.00</span>
                   <span class="dtw-unit">km</span>
                 </div>
               </div>
             </div>
 
-            <!-- Row 3.5: UNIK4 Screen Footer (Screenshot 1) -->
             <div class="screen-row unik4-footer-bar">
-              <span class="foot-left" id="telemNextDist">NEXT 1.22</span>
-              <span class="foot-mid">EZ AUT SS - 456.74 km</span>
-              <span class="foot-right" id="telemFootCap">Cap 32°</span>
+              <span class="foot-left" id="telemNextDist">NEXT --</span>
+              <span class="foot-mid" id="telemStageFoot">DAKAR SPECIAL STAGE</span>
+              <span class="foot-right" id="telemFootCap">Cap --°</span>
             </div>
 
-            <!-- Row 4: Live GPS Coordinates, Elevation & Slope -->
             <div class="screen-row telemetry-row">
               <div class="coord-info">
-                <span class="telem-label">GPS:</span>
-                <span class="telem-val" id="telemetryCoords">-14.0745° N, -75.7410° W</span>
+                <span class="telem-label" id="lblGps">GPS:</span>
+                <span class="telem-val" id="telemetryCoords">--</span>
               </div>
               <div class="alt-slope-info">
-                <span class="telem-label">ALT:</span>
-                <span class="telem-val highlight" id="telemetryAlt">428 m</span>
-                <span class="telem-label">SLOPE:</span>
-                <span class="telem-val" id="telemetrySlope">+2.4°</span>
+                <span class="telem-label" id="lblAlt">ALT:</span>
+                <span class="telem-val highlight" id="telemetryAlt">0 m</span>
+                <span class="telem-label" id="lblSlope">SLOPE:</span>
+                <span class="telem-val" id="telemetrySlope">0.0°</span>
               </div>
             </div>
 
@@ -187,32 +191,28 @@
         </div>
       </section>
 
-      <!-- CENTER / RIGHT: DAKAR DIGITAL ROADBOOK (Exact Screenshots 1 & 4 Replica) -->
       <section class="roadbook-section" id="roadbookSection">
         <div class="roadbook-container">
           
-          <!-- Roadbook Header (Screenshot 4) -->
           <div class="roadbook-header" id="rbHeader">
-            <div class="rb-stage-title" id="rbStageTitle">INCA STAGE 01</div>
+            <div class="rb-stage-title" id="rbStageTitle">NO STAGE LOADED</div>
             <div class="rb-meta-badges">
-              <span class="meta-pill" id="rbMetaDst">DST: 163 km</span>
-              <span class="meta-pill" id="rbMetaWp">WP: 56</span>
-              <span class="meta-pill" id="rbMetaCp">CP: 2</span>
+              <span class="meta-pill" id="rbMetaDst">DST: --</span>
+              <span class="meta-pill" id="rbMetaWp">WP: --</span>
+              <span class="meta-pill" id="rbMetaCp">CP: --</span>
             </div>
           </div>
 
-          <!-- 3-Column Notes Scroll List -->
           <div class="roadbook-table-container">
             <table class="dakar-roadbook-table" id="roadbookTable">
               <thead>
                 <tr>
-                  <th class="col-distance">DISTANCES</th>
-                  <th class="col-tulip">DIAGRAMME TULIPE</th>
-                  <th class="col-lexicon">NOTES / SYMBOLES FIA</th>
+                  <th class="col-distance" id="thDistances">DISTANCES</th>
+                  <th class="col-tulip" id="thTulip">DIAGRAMME TULIPE</th>
+                  <th class="col-lexicon" id="thLexicon">NOTES / SYMBOLES FIA</th>
                 </tr>
               </thead>
               <tbody id="roadbookBody">
-                <!-- Dynamically generated authentic Dakar notes -->
               </tbody>
             </table>
           </div>
@@ -220,7 +220,6 @@
         </div>
       </section>
 
-      <!-- SATELLITE MAP VIEW (Apple MapKit / High-Res Satellite with Waypoints & Polyline) -->
       <section class="map-section" id="mapSection">
         <div id="satelliteMap" class="map-viewport"></div>
         <div class="map-floating-overlay">
@@ -235,24 +234,17 @@
 
     </main>
 
-    <!-- BOTTOM: DAKAR ERTF TÉLÉCOMMANDE (Screenshot 1 Remote Control Bar) -->
     <footer class="telecommande-footer" id="telecommandeFooter">
       <div class="remote-inner">
-        
         <div class="remote-btn-group action-group">
-          <!-- ESC (red) -->
-          <button class="dakar-key key-esc" id="keyEsc" title="Escape / Standard">ESC</button>
-          <!-- OK (green) -->
+          <button class="dakar-key key-esc" id="keyEsc" title="Escape">ESC</button>
           <button class="dakar-key key-ok" id="keyOk" title="Confirm / Toggle Biffage">OK</button>
-          <!-- STN (yellow Sentinel Horn) -->
           <button class="dakar-key key-stn" id="keyStn" title="Sentinel Overtake Alarm">STN</button>
-          <!-- TRIP RST (magenta) -->
           <button class="dakar-key key-rst" id="keyTripRst" title="Reset Partial Odometer">TRIP<br>RST</button>
         </div>
 
         <div class="remote-divider"></div>
 
-        <!-- ODO +/- Trip Calibration -->
         <div class="remote-btn-group odo-group">
           <button class="dakar-key key-calib" id="keyOdoPlus" title="Add 100m to ODO">+0.10</button>
           <button class="dakar-key key-calib" id="keyOdoMinus" title="Subtract 100m from ODO">-0.10</button>
@@ -260,16 +252,26 @@
 
         <div class="remote-divider"></div>
 
-        <!-- Note Navigation -->
         <div class="remote-btn-group nav-group">
           <button class="dakar-key key-nav" id="keyNotePrev" title="Previous Roadbook Note">▲ NOTE -</button>
           <button class="dakar-key key-nav" id="keyNoteNext" title="Next Roadbook Note">▼ NOTE +</button>
         </div>
-
       </div>
     </footer>
 
-    <!-- MODAL 1: ROUTE PLANNER (Point A to Point B & Dakar Stages) -->
+    <div class="modal-overlay" id="languageModal" style="display: none;">
+      <div class="modal-card" style="max-width: 480px;">
+        <div class="modal-header">
+          <h3 id="txtSelectLangTitle">🌐 SELECT LANGUAGE / CHOISIR LA LANGUE</h3>
+          <button class="close-modal-btn" id="btnCloseLanguageModal">✕</button>
+        </div>
+        <div class="modal-body">
+          <div id="languageOptionsList" style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="modal-overlay" id="routeModal" style="display: none;">
       <div class="modal-card">
         <div class="modal-header">
@@ -277,70 +279,48 @@
           <button class="close-modal-btn" id="btnCloseRouteModal">✕</button>
         </div>
         <div class="modal-body">
-          <p class="modal-desc">Calculate shortest rally raid roadbook navigation for ANY Point A to Point B worldwide with Apple MapKit directions, or launch official Dakar special stages.</p>
+          <p class="modal-desc" id="txtRouteModalDesc">Calculate shortest rally raid roadbook navigation for ANY Point A to Point B worldwide with alternative route paths.</p>
           
           <div class="input-form">
             <div class="input-row">
-              <label>Point A (Departure):</label>
-              <input type="text" id="inputPointA" value="Pisco Dunes, Peru" placeholder="Search address, city, or coordinates..." />
+              <label id="lblPointA">Point A (Departure):</label>
+              <input type="text" id="inputPointA" value="" placeholder="Search address, city, or coordinates..." />
             </div>
             <div class="input-row">
-              <label>Point B (Destination):</label>
-              <input type="text" id="inputPointB" value="Ica Oasis, Peru" placeholder="Search destination..." />
+              <label id="lblPointB">Point B (Destination):</label>
+              <input type="text" id="inputPointB" value="" placeholder="Search destination..." />
             </div>
-            <button class="btn-primary" id="btnCalculateRoute">⚡ CALCULATE & GENERATE ROADBOOK</button>
+            <button class="btn-primary" id="btnCalculateRoute">⚡ FIND ALTERNATIVE ROUTES</button>
           </div>
 
-          <div class="preset-section">
-            <h4>OFFICIAL DAKAR RALLY STAGE PRESETS:</h4>
-            <div class="stage-card" id="presetInca">
-              <div class="stage-info">
-                <strong>INCA STAGE 01 (PERU DUNES) — SCREENSHOT 4 REPLICA</strong>
-                <p>163 km • 56 Waypoints • 2 Checkpoints • Pisco deep dunes, CAP 286°, CAP 182°, WPC, WPS, Dangers !!</p>
-              </div>
-              <button class="load-stage-btn" id="btnLoadInca">LOAD STAGE</button>
-            </div>
-
-            <div class="stage-card" id="presetEmptyQuarter">
-              <div class="stage-info">
-                <strong>DAKAR 2025 STAGE 5 (EMPTY QUARTER) — SCREENSHOT 1 REPLICA</strong>
-                <p>456 km • 38 Waypoints • Shubaytah dunes, Notes 12-16, CAP 87°, 108°, 158°, DZ 50 speed control zone</p>
-              </div>
-              <button class="load-stage-btn" id="btnLoadEmptyQuarter">LOAD STAGE</button>
-            </div>
-
-            <div class="stage-card" id="presetAlUla">
-              <div class="stage-info">
-                <strong>AL ULA TO YANBU CANYONS (CHRONO SPECIAL)</strong>
-                <p>320 km • Canyons, rocky riverbeds (RIO), narrow defiles (E3), mountain passes</p>
-              </div>
-              <button class="load-stage-btn" id="btnLoadAlUla">LOAD STAGE</button>
-            </div>
+          <div id="alternateRoutesContainer" style="display: none; margin-top: 15px;">
+            <h4 id="lblSelectRoute" style="font-size: 13px; font-weight: 900; margin-bottom: 8px;">SELECT PREFERRED ROUTE:</h4>
+            <div id="alternateRoutesList" style="display: flex; flex-direction: column; gap: 8px;"></div>
+            <button class="btn-primary" id="btnConfirmSelectedRoute" style="margin-top: 10px; background: #FF6D00;">⚡ GENERATE ROADBOOK FOR SELECTED ROUTE</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- MODAL 2: FIA SYMBOL LEXICON (Exact Screenshots 2 & 3 Replica) -->
     <div class="modal-overlay" id="lexiconModal" style="display: none;">
       <div class="modal-card lexicon-card">
         <div class="modal-header">
-          <h3>📖 FIA DAKAR SYMBOL LEXICON (2024 / 2025)</h3>
+          <h3>📖 FIA DAKAR SYMBOL LEXICON</h3>
           <button class="close-modal-btn" id="btnCloseLexiconModal">✕</button>
         </div>
         <div class="modal-body">
-          <div class="lexicon-filter-bar">
+          <div class="lexicon-filter-tabs">
             <button class="lex-cat-btn active" data-cat="all">ALL</button>
-            <button class="lex-cat-btn" data-cat="tracks">Tracks</button>
-            <button class="lex-cat-btn" data-cat="elements">Elements</button>
-            <button class="lex-cat-btn" data-cat="areas">Areas</button>
-            <button class="lex-cat-btn" data-cat="safety">Safety</button>
-            <button class="lex-cat-btn" data-cat="waypoints">Waypoints</button>
-            <button class="lex-cat-btn" data-cat="directions">Directions</button>
-            <button class="lex-cat-btn" data-cat="specificities">Specificities</button>
+            <button class="lex-cat-btn" data-cat="tracks">TRACKS</button>
+            <button class="lex-cat-btn" data-cat="elements">ELEMENTS</button>
+            <button class="lex-cat-btn" data-cat="areas">AREAS</button>
+            <button class="lex-cat-btn" data-cat="safety">SAFETY / DANGERS</button>
+            <button class="lex-cat-btn" data-cat="waypoints">WAYPOINTS</button>
+            <button class="lex-cat-btn" data-cat="directions">DIRECTIONS</button>
+            <button class="lex-cat-btn" data-cat="specificities">TERRAIN</button>
           </div>
-          <div class="lexicon-grid" id="lexiconGrid">
-            <!-- Dynamically populated from complete FIA Lexicon database -->
+
+          <div class="lexicon-grid-container" id="lexiconGrid">
           </div>
         </div>
       </div>

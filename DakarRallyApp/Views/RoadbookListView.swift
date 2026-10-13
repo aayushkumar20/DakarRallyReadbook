@@ -1,15 +1,11 @@
 import SwiftUI
-
 public struct RoadbookListView: View {
     @ObservedObject var locationService: LocationService
-    
     public init(locationService: LocationService) {
         self.locationService = locationService
     }
-    
     public var body: some View {
         VStack(spacing: 0) {
-            // Roadbook Stage Header (Screenshot 4: Inca stage 01 | DST: 163 km WP: 56 CP: 2)
             if let stage = locationService.activeStage {
                 HStack {
                     Text(stage.title)
@@ -30,8 +26,6 @@ public struct RoadbookListView: View {
                 .background(Color.white)
                 .border(Color.black, width: 2)
             }
-            
-            // Notes List ScrollView
             ScrollViewReader { proxy in
                 ScrollView {
                     LazyVStack(spacing: 0) {
@@ -71,30 +65,21 @@ public struct RoadbookListView: View {
         .background(Color(red: 0.95, green: 0.95, blue: 0.95))
     }
 }
-
 public struct RoadbookRowView: View {
     public let note: RoadbookNote
     public let isCurrent: Bool
     public let onTap: () -> Void
-    
     public var body: some View {
         ZStack {
-            // Main 3-column row
             HStack(spacing: 0) {
-                // COLUMN 1: DISTANCE (Total ODO, Partial ODO, Note # Badge, Validation Badge)
                 VStack(alignment: .trailing, spacing: 0) {
-                    // Total ODO (Top bold)
                     Text(String(format: "%.2f", note.totalKM))
                         .font(.system(size: 24, weight: .black, design: .monospaced))
                         .foregroundColor(.black)
                         .padding(.top, 4)
                         .padding(.trailing, 6)
-                    
                     Spacer()
-                    
-                    // Note Sequence Badge + Partial ODO
                     HStack(alignment: .bottom, spacing: 4) {
-                        // Black sequence box e.g. [12]
                         Text("\(note.id)")
                             .font(.system(size: 12, weight: .black))
                             .foregroundColor(.white)
@@ -102,8 +87,6 @@ public struct RoadbookRowView: View {
                             .padding(.vertical, 2)
                             .background(isCurrent ? Color.blue : Color.black)
                             .cornerRadius(2)
-                        
-                        // Partial ODO
                         Text(String(format: "%.2f", note.partialKM))
                             .font(.system(size: 15, weight: .bold, design: .monospaced))
                             .foregroundColor(.black)
@@ -114,13 +97,9 @@ public struct RoadbookRowView: View {
                 .frame(width: 105, height: 95)
                 .background(isCurrent ? Color(red: 0.9, green: 0.95, blue: 1.0) : Color.white)
                 .border(Color.black, width: 1.5)
-                
-                // COLUMN 2: TULIP DIAGRAM (Vector arrow & CAP heading in yellow)
                 TulipVectorView(tulip: note.tulip, isHighlighted: isCurrent, noteId: note.id)
                     .frame(width: 110, height: 95)
                     .border(Color.black, width: 1.5)
-                
-                // COLUMN 3: FIA LEXICON & DANGERS (!, !!, !!!, DZ, FZ, TERRAIN)
                 FIASymbolView(
                     danger: note.danger,
                     speedLimit: note.speedLimit,
@@ -135,8 +114,6 @@ public struct RoadbookRowView: View {
             .onTapGesture {
                 onTap()
             }
-            
-            // BIFFAGE OVERLAY (Diagonal Strikethrough Line when note is crossed out / validated)
             if note.isBiffed {
                 GeometryReader { geo in
                     Path { path in

@@ -1,6 +1,5 @@
 import Foundation
 import SwiftUI
-
 public struct LexiconItem: Identifiable, Hashable {
     public var id: String { code }
     public var code: String
@@ -8,7 +7,6 @@ public struct LexiconItem: Identifiable, Hashable {
     public var englishName: String
     public var category: LexiconCategory
     public var iconSymbolName: String?
-    
     public init(code: String, frenchName: String, englishName: String, category: LexiconCategory, iconSymbolName: String? = nil) {
         self.code = code
         self.frenchName = frenchName
@@ -17,7 +15,6 @@ public struct LexiconItem: Identifiable, Hashable {
         self.iconSymbolName = iconSymbolName
     }
 }
-
 public enum LexiconCategory: String, CaseIterable {
     case tracks = "Tracks"
     case elements = "Elements"
@@ -28,10 +25,8 @@ public enum LexiconCategory: String, CaseIterable {
     case electric = "Electric"
     case specificities = "Specificities"
 }
-
 public enum FIALexicon {
     public static let items: [LexiconItem] = [
-        // TRACKS
         LexiconItem(code: "2X", frenchName: "2 voies", englishName: "Dual carriageway", category: .tracks),
         LexiconItem(code: "RD", frenchName: "Route", englishName: "Road", category: .tracks),
         LexiconItem(code: "P", frenchName: "Piste", englishName: "Track", category: .tracks),
@@ -40,8 +35,6 @@ public enum FIALexicon {
         LexiconItem(code: "PP", frenchName: "Piste principale", englishName: "Main track", category: .tracks),
         LexiconItem(code: "PS", frenchName: "Piste sinueuse", englishName: "Winding track", category: .tracks),
         LexiconItem(code: "PPS", frenchName: "Piste principale sinueuse", englishName: "Winding main track", category: .tracks),
-
-        // ELEMENTS
         LexiconItem(code: "UB", frenchName: "Sous le pont", englishName: "Under bridge", category: .elements),
         LexiconItem(code: "OB", frenchName: "Sur le pont", englishName: "Over bridge", category: .elements),
         LexiconItem(code: "CL", frenchName: "Clôture", englishName: "Fence", category: .elements),
@@ -55,16 +48,12 @@ public enum FIALexicon {
         LexiconItem(code: "CIT", frenchName: "Citerne", englishName: "Water tank", category: .elements),
         LexiconItem(code: "BAT", frenchName: "Bâtiments", englishName: "Buildings", category: .elements),
         LexiconItem(code: "CF", frenchName: "Voie ferrée", englishName: "Rail road", category: .elements),
-
-        // AREAS
         LexiconItem(code: "START", frenchName: "Départ", englishName: "Start", category: .areas),
         LexiconItem(code: "FINISH", frenchName: "Arrivée", englishName: "Finish", category: .areas),
         LexiconItem(code: "ESSENCE", frenchName: "Station essence", englishName: "Petrol station", category: .areas),
         LexiconItem(code: "CLOCK", frenchName: "Heure / Horloge", englishName: "Clock", category: .areas),
         LexiconItem(code: "VIL", frenchName: "Village", englishName: "Village", category: .areas),
         LexiconItem(code: "ZS", frenchName: "Zone sensible", englishName: "Sensitive zone", category: .areas),
-
-        // SAFETY
         LexiconItem(code: "SL30", frenchName: "Limitation 30", englishName: "Speed limit 30", category: .safety),
         LexiconItem(code: "SL50", frenchName: "Limitation 50", englishName: "Speed limit 50", category: .safety),
         LexiconItem(code: "END_SL", frenchName: "Fin limitation", englishName: "Finish speed limit zone", category: .safety),
@@ -73,8 +62,6 @@ public enum FIALexicon {
         LexiconItem(code: "!!!", frenchName: "Danger 3", englishName: "Danger 3", category: .safety),
         LexiconItem(code: "DZ", frenchName: "Début zone vitesse", englishName: "Start speed zone", category: .safety),
         LexiconItem(code: "FZ", frenchName: "Fin zone vitesse", englishName: "Finish speed zone", category: .safety),
-
-        // WAYPOINTS
         LexiconItem(code: "PC", frenchName: "Poste de contrôle", englishName: "PC", category: .waypoints),
         LexiconItem(code: "WPE", frenchName: "Point éclipse", englishName: "Waypoint eclipse", category: .waypoints),
         LexiconItem(code: "WPS", frenchName: "Point sécurité", englishName: "Waypoint safety", category: .waypoints),
@@ -82,8 +69,6 @@ public enum FIALexicon {
         LexiconItem(code: "WPC", frenchName: "Point contrôle", englishName: "Waypoint control", category: .waypoints),
         LexiconItem(code: "DST", frenchName: "Distance", englishName: "Distance", category: .waypoints),
         LexiconItem(code: "STOP", frenchName: "Arrêt", englishName: "Stop", category: .waypoints),
-
-        // DIRECTIONS
         LexiconItem(code: "PAN", frenchName: "Panneaux", englishName: "Panels", category: .directions),
         LexiconItem(code: "MONTEE", frenchName: "Montée", englishName: "Uphill", category: .directions),
         LexiconItem(code: "DESCENTE", frenchName: "Descente", englishName: "Downhill", category: .directions),
@@ -94,16 +79,12 @@ public enum FIALexicon {
         LexiconItem(code: "RP", frenchName: "Reprendre", englishName: "To take", category: .directions),
         LexiconItem(code: "TDSPP", frenchName: "Tout droit sur piste principale", englishName: "Keep straight on main track", category: .directions),
         LexiconItem(code: "+/-V", frenchName: "Plus ou moins visible", englishName: "More or less visible", category: .directions),
-
-        // ELECTRIC
         LexiconItem(code: "ANT", frenchName: "Antenne", englishName: "Antenna", category: .electric),
         LexiconItem(code: "LEL", frenchName: "Ligne électrique", englishName: "Electric line", category: .electric),
         LexiconItem(code: "POT", frenchName: "Poteau", englishName: "Post", category: .electric),
         LexiconItem(code: "PEL", frenchName: "Pylône électrique", englishName: "Electric pole", category: .electric),
         LexiconItem(code: "HT", frenchName: "Haute tension", englishName: "High voltage line", category: .electric),
         LexiconItem(code: "EOL", frenchName: "Éolienne", englishName: "Windmill", category: .electric),
-
-        // SPECIFICITIES & TERRAIN
         LexiconItem(code: "MONT", frenchName: "Montagne", englishName: "Mountain", category: .specificities),
         LexiconItem(code: "ROCH", frenchName: "Rocher", englishName: "Rock", category: .specificities),
         LexiconItem(code: "SA", frenchName: "Sable", englishName: "Sand", category: .specificities),
@@ -142,7 +123,6 @@ public enum FIALexicon {
         LexiconItem(code: "SER", frenchName: "Serré", englishName: "Tight", category: .specificities),
         LexiconItem(code: "S", frenchName: "Sinueux", englishName: "Twisty", category: .specificities)
     ]
-    
     public static func item(for code: String) -> LexiconItem? {
         items.first { $0.code.lowercased() == code.lowercased() }
     }

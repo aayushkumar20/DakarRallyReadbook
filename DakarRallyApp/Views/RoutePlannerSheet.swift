@@ -1,21 +1,21 @@
 import SwiftUI
 import MapKit
-
 public struct RoutePlannerSheet: View {
     @ObservedObject var locationService: LocationService
     @Binding var polylineCoordinates: [CLLocationCoordinate2D]
     @Environment(\.dismiss) var dismiss
-    
-    @State private var fromQuery: String = "Current Location"
-    @State private var toQuery: String = "Pisco Dunes, Peru"
+    @State private var fromQuery: String = ""
+    @State private var toQuery: String = ""
     @State private var isCalculating: Bool = false
     @State private var errorMessage: String? = nil
-    
+    @State private var availableRoutes: [RallyRouteOption] = []
+    @State private var selectedRouteIndex: Int = 0
+    @State private var resolvedSourceCoord: CLLocationCoordinate2D? = nil
+    @State private var resolvedDestCoord: CLLocationCoordinate2D? = nil
     public init(locationService: LocationService, polylineCoordinates: Binding<[CLLocationCoordinate2D]>) {
         self.locationService = locationService
         self._polylineCoordinates = polylineCoordinates
     }
-    
     public var body: some View {
         NavigationView {
             Form {
@@ -23,34 +23,74 @@ public struct RoutePlannerSheet: View {
                     HStack {
                         Image(systemName: "circle.circle.fill")
                             .foregroundColor(.green)
-                        TextField("Point A (Departure)", text: $fromQuery)
+                        TextField("Point A (Departure or empty for GPS)", text: $fromQuery)
                     }
-                    
                     HStack {
                         Image(systemName: "mappin.circle.fill")
                             .foregroundColor(.red)
                         TextField("Point B (Destination)", text: $toQuery)
                     }
-                    
-                    Button(action: calculateCustomRoute) {
+                    Button(action: findAlternativeRoutes) {
                         HStack {
                             Spacer()
                             if isCalculating {
                                 ProgressView()
                                     .padding(.trailing, 8)
                             }
-                            Text("CALCULATE & GENERATE ROADBOOK")
+                            Text("FIND ALL ALTERNATIVE ROUTES")
                                 .font(.system(size: 13, weight: .black))
                                 .foregroundColor(.white)
                             Spacer()
                         }
                         .padding(.vertical, 8)
-                        .background(Color.orange)
+                        .background(Color.blue)
                         .cornerRadius(8)
                     }
-                    .disabled(isCalculating)
+                    .disabled(isCalculating || toQuery.trimmingCharacters(in: .whitespaces).isEmpty)
                 }
-                
+                if !availableRoutes.isEmpty {
+                    Section(header: Text("SELECT PREFERRED ROUTE (ALTERNATE PATHS)")) {
+                        ForEach(availableRoutes.indices, id: \.self) { idx in
+                            let opt = availableRoutes[idx]
+                            HStack {
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text(opt.name)
+                                        .font(.system(size: 13, weight: .black))
+                                        .foregroundColor(selectedRouteIndex == idx ? .orange : .primary)
+                                    Text("\(String(format: "%.1f", opt.distanceKM)) km • Approx \(Int(opt.expectedDurationMinutes)) min")
+                                        .font(.system(size: 11))
+                                        .foregroundColor(.secondary)
+                                }
+                                Spacer()
+                                if selectedRouteIndex == idx {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundColor(.orange)
+                                        .font(.system(size: 20))
+                                } else {
+                                    Image(systemName: "circle")
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 20))
+                                }
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                selectedRouteIndex = idx
+                            }
+                        }
+                        Button(action: generateSelectedRoadbook) {
+                            HStack {
+                                Spacer()
+                                Text("⚡ GENERATE ROADBOOK FOR SELECTED ROUTE")
+                                    .font(.system(size: 13, weight: .black))
+                                    .foregroundColor(.white)
+                                Spacer()
+                            }
+                            .padding(.vertical, 10)
+                            .background(Color.orange)
+                            .cornerRadius(8)
+                        }
+                    }
+                }
                 if let error = errorMessage {
                     Section {
                         Text(error)
@@ -58,31 +98,6 @@ public struct RoutePlannerSheet: View {
                             .font(.caption)
                     }
                 }
-                
-                Section(header: Text("DAKAR RALLY OFFICIAL STAGE PRESETS")) {
-                    Button(action: loadIncaStage) {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("INCA STAGE 01 (PERU DUNES)")
-                                .font(.system(size: 14, weight: .black))
-                                .foregroundColor(.primary)
-                            Text("Exact 100% replica from Dakar official roadbook (Screenshot 4). Pisco sand dunes, WPC, WPS, CAP 286°, CAP 182°.")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                    
-                    Button(action: loadEmptyQuarterStage) {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("DAKAR 2025 STAGE 5 (EMPTY QUARTER)")
-                                .font(.system(size: 14, weight: .black))
-                                .foregroundColor(.primary)
-                            Text("Exact replica from Unik4 memo (Screenshot 1). Shubaytah dunes, notes 12-16, DZ 50 speed control zone, CP2.")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                }
-                
                 Section(header: Text("REAL-TIME RACE CONTROLS")) {
                     Button(action: {
                         if locationService.telemetry.isSimulating {
@@ -99,7 +114,6 @@ public struct RoutePlannerSheet: View {
                         }
                         .foregroundColor(locationService.telemetry.isSimulating ? .red : .blue)
                     }
-                    
                     Button(action: {
                         locationService.startLiveTracking()
                         dismiss()
@@ -113,54 +127,57 @@ public struct RoutePlannerSheet: View {
                     }
                 }
             }
-            .navigationTitle("Dakar Navigation")
+            .navigationTitle("Dakar Route Planner")
             .navigationBarItems(trailing: Button("Done") { dismiss() })
         }
     }
-    
-    private func loadIncaStage() {
-        let (stage, coords) = AppleMapKitRouteEngine.loadIncaStage01()
-        locationService.setStage(stage)
-        polylineCoordinates = coords
-        dismiss()
-    }
-    
-    private func loadEmptyQuarterStage() {
-        let (stage, coords) = AppleMapKitRouteEngine.loadEmptyQuarterStage()
-        locationService.setStage(stage)
-        polylineCoordinates = coords
-        dismiss()
-    }
-    
-    private func calculateCustomRoute() {
+    private func findAlternativeRoutes() {
         isCalculating = true
         errorMessage = nil
-        
+        availableRoutes = []
         Task {
             do {
-                // Determine source coordinates
                 var sourceCoord = CLLocationCoordinate2D(latitude: locationService.telemetry.currentLatitude, longitude: locationService.telemetry.currentLongitude)
-                
-                if fromQuery.lowercased() != "current location" && !fromQuery.isEmpty {
+                if !fromQuery.trimmingCharacters(in: .whitespaces).isEmpty && fromQuery.lowercased() != "current location" {
                     let fromItems = try await AppleMapKitRouteEngine.shared.searchLocation(query: fromQuery)
                     guard let first = fromItems.first?.placemark.coordinate else {
                         throw NSError(domain: "Planner", code: 404, userInfo: [NSLocalizedDescriptionKey: "Could not find Point A: \(fromQuery)"])
                     }
                     sourceCoord = first
                 }
-                
-                // Determine destination coordinates
                 let toItems = try await AppleMapKitRouteEngine.shared.searchLocation(query: toQuery)
                 guard let destCoord = toItems.first?.placemark.coordinate else {
                     throw NSError(domain: "Planner", code: 404, userInfo: [NSLocalizedDescriptionKey: "Could not find Point B: \(toQuery)"])
                 }
-                
+                let options = try await AppleMapKitRouteEngine.shared.calculateAlternativeRoutes(from: sourceCoord, to: destCoord)
+                await MainActor.run {
+                    self.resolvedSourceCoord = sourceCoord
+                    self.resolvedDestCoord = destCoord
+                    self.availableRoutes = options
+                    self.selectedRouteIndex = 0
+                    self.isCalculating = false
+                }
+            } catch {
+                await MainActor.run {
+                    self.errorMessage = error.localizedDescription
+                    self.isCalculating = false
+                }
+            }
+        }
+    }
+    private func generateSelectedRoadbook() {
+        guard let source = resolvedSourceCoord, let dest = resolvedDestCoord else { return }
+        isCalculating = true
+        Task {
+            do {
+                let fromTitle = fromQuery.isEmpty ? "CURRENT GPS" : fromQuery.uppercased()
+                let toTitle = toQuery.uppercased()
                 let (generatedStage, coords) = try await AppleMapKitRouteEngine.shared.generateRoadbook(
-                    from: sourceCoord,
-                    to: destCoord,
-                    stageTitle: "\(fromQuery.uppercased()) TO \(toQuery.uppercased())"
+                    from: source,
+                    to: dest,
+                    stageTitle: "\(fromTitle) TO \(toTitle)",
+                    routeIndex: selectedRouteIndex
                 )
-                
                 await MainActor.run {
                     self.polylineCoordinates = coords
                     self.locationService.setStage(generatedStage)

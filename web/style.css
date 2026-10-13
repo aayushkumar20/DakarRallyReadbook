@@ -1,5 +1,3 @@
-/* DAKAR RALLY RAID ERTF UNIK4 & DIGITAL ROADBOOK STYLING */
-
 :root {
   --dakar-yellow: #FFE500;
   --dakar-yellow-hover: #FFF152;
@@ -20,13 +18,11 @@
   --font-digital: 'Chakra Petch', sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
 body {
   font-family: var(--font-body);
   background: #0B0C0E;
@@ -35,7 +31,6 @@ body {
   user-select: none;
   -webkit-font-smoothing: antialiased;
 }
-
 .app-container {
   display: flex;
   flex-direction: column;
@@ -43,8 +38,6 @@ body {
   width: 100vw;
   overflow: hidden;
 }
-
-/* TOP COCKPIT BAR */
 .cockpit-header {
   height: 48px;
   background: #111215;
@@ -55,13 +48,11 @@ body {
   padding: 0 14px;
   z-index: 100;
 }
-
 .brand {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-
 .brand-title {
   font-family: var(--font-digital);
   font-size: 14px;
@@ -69,7 +60,6 @@ body {
   letter-spacing: 1.5px;
   color: var(--dakar-yellow);
 }
-
 .cert-tag {
   font-size: 9px;
   background: #272930;
@@ -78,7 +68,6 @@ body {
   border-radius: 3px;
   font-weight: 700;
 }
-
 .mode-selector {
   display: flex;
   background: #1C1E24;
@@ -86,7 +75,6 @@ body {
   padding: 2px;
   gap: 2px;
 }
-
 .mode-btn {
   background: transparent;
   border: none;
@@ -99,17 +87,14 @@ body {
   cursor: pointer;
   transition: all 0.15s ease;
 }
-
 .mode-btn.active {
   background: var(--dakar-yellow);
   color: #000;
 }
-
 .header-actions {
   display: flex;
   gap: 8px;
 }
-
 .action-btn {
   background: #252830;
   color: #EEE;
@@ -121,12 +106,10 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
 }
-
 .action-btn:hover {
   background: #323642;
   border-color: #52596B;
 }
-
 .sim-btn {
   background: #E65100;
   border-color: #FF6D00;
@@ -135,8 +118,6 @@ body {
 .sim-btn:hover {
   background: #FF6D00;
 }
-
-/* SIMULATION BANNER */
 .sim-banner {
   background: var(--dakar-yellow);
   color: #000;
@@ -149,7 +130,6 @@ body {
   font-family: var(--font-digital);
   z-index: 90;
 }
-
 .pulse-dot {
   width: 10px;
   height: 10px;
@@ -159,17 +139,14 @@ body {
   display: inline-block;
   margin-right: 8px;
 }
-
 @keyframes pulse {
   from { opacity: 0.3; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1.15); }
 }
-
 .sim-controls {
   display: flex;
   gap: 6px;
 }
-
 .sim-speed-btn, .sim-stop-btn {
   border: 1px solid #000;
   background: #FFF;
@@ -180,27 +157,21 @@ body {
   border-radius: 3px;
   cursor: pointer;
 }
-
 .sim-speed-btn.active {
   background: #000;
   color: #FFF;
 }
-
 .sim-stop-btn {
   background: var(--dakar-red);
   color: #FFF;
   border-color: var(--dakar-red);
 }
-
-/* MAIN WORKSPACE */
 .main-workspace {
   flex: 1;
   display: flex;
   overflow: hidden;
   background: #0F1012;
 }
-
-/* UNIK4 HARDWARE BEZEL (Screenshot 1) */
 .device-section {
   width: 440px;
   min-width: 420px;
@@ -211,7 +182,6 @@ body {
   padding: 12px;
   overflow-y: auto;
 }
-
 .unik4-hardware-frame {
   background: #22242B;
   border: 4px solid #111215;
@@ -221,7 +191,6 @@ body {
   flex-direction: column;
   overflow: hidden;
 }
-
 .hardware-top-plate {
   background: #141518;
   padding: 8px 12px;
@@ -230,20 +199,17 @@ body {
   justify-content: space-between;
   border-bottom: 2px solid #2B2E36;
 }
-
 .device-label {
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.5px;
   color: var(--dakar-yellow);
 }
-
 .category-label {
   font-size: 9px;
   font-weight: 700;
   color: #888;
 }
-
 .power-led {
   width: 10px;
   height: 10px;
@@ -251,8 +217,6 @@ body {
   background: var(--dakar-green);
   box-shadow: 0 0 8px var(--dakar-green);
 }
-
-/* UNIK4 SCREEN (Exact layout from Screenshot 1) */
 .unik4-screen {
   background: #FFFFFF;
   color: #000000;
@@ -260,65 +224,54 @@ body {
   flex-direction: column;
   border: 3px solid #000000;
 }
-
 .screen-row {
   border-bottom: 2px solid #000000;
   display: flex;
 }
-
-/* Row 1: Status bar */
 .status-bar {
   align-items: center;
   justify-content: space-between;
   padding: 6px 8px;
   background: #FFFFFF;
 }
-
 .sat-power {
   display: flex;
   align-items: center;
   gap: 4px;
   font-size: 14px;
 }
-
 .speed-box {
   display: flex;
   flex-direction: column;
   min-width: 55px;
 }
-
 .speed-num-row {
   display: flex;
   align-items: baseline;
   gap: 2px;
 }
-
 .speed-num {
   font-family: var(--font-mono);
   font-size: 26px;
   font-weight: 900;
   line-height: 1;
 }
-
 .unit {
   font-size: 10px;
   font-weight: 700;
 }
-
 .tiny-label {
   font-size: 8px;
   color: #555;
   font-weight: 700;
   text-transform: uppercase;
 }
-
 .tiny-sub {
   font-size: 7px;
   font-weight: 800;
   color: #555;
   text-align: center;
 }
-
 .validated-box {
   display: flex;
   flex-direction: column;
@@ -327,99 +280,82 @@ body {
   border-right: 1px solid #CCC;
   padding: 0 8px;
 }
-
 .val-count-row {
   display: flex;
   align-items: center;
   gap: 3px;
 }
-
 .val-num {
   font-family: var(--font-mono);
   font-size: 16px;
   font-weight: 900;
 }
-
 .target-wpt-box {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .wpt-id-row {
   display: flex;
   align-items: center;
   gap: 4px;
 }
-
 .wpt-prefix {
   font-size: 11px;
   font-weight: 800;
 }
-
 .wpt-name {
   font-family: var(--font-mono);
   font-size: 14px;
   font-weight: 900;
   color: var(--dakar-blue);
 }
-
 .cap-suivi-box {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .cap-badge {
   background: var(--dakar-yellow);
   border: 1.5px solid #000;
   padding: 2px 6px;
 }
-
 .cap-num {
   font-family: var(--font-mono);
   font-size: 18px;
   font-weight: 900;
   color: #000;
 }
-
 .cap-label {
   font-size: 7px;
   font-weight: 900;
   color: #000;
   margin-top: 1px;
 }
-
-/* Row 2: Large Odometers */
 .odo-bar {
   background: #F4F6F9;
   min-height: 85px;
 }
-
 .odo-col {
   flex: 1;
   padding: 6px 12px;
   display: flex;
   flex-direction: column;
 }
-
 .total-col {
   border-right: 2px solid #000;
 }
-
 .odo-tag {
   font-size: 11px;
   font-weight: 900;
   color: var(--dakar-blue);
   letter-spacing: 0.5px;
 }
-
 .partiel-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .rst-pill {
   background: var(--dakar-red);
   color: #FFF;
@@ -430,11 +366,9 @@ body {
   border-radius: 3px;
   cursor: pointer;
 }
-
 .rst-pill:hover {
   background: #B71C1C;
 }
-
 .odo-display {
   font-family: var(--font-mono);
   font-size: 44px;
@@ -443,15 +377,43 @@ body {
   color: #000;
   letter-spacing: -1px;
 }
-
-/* Row 3: DZ-FZ Speed Zone & Waypoint Guidance */
+.chrono-bar {
+  background: #111215;
+  color: #FFF;
+  padding: 4px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #000;
+  font-family: var(--font-mono);
+}
+.chrono-item {
+  display: flex;
+  flex-direction: column;
+}
+.chrono-tag {
+  font-size: 7.5px;
+  font-weight: 900;
+  color: #888;
+  letter-spacing: 0.5px;
+}
+.chrono-val {
+  font-size: 11px;
+  font-weight: 800;
+  color: #FFF;
+}
+.chrono-val.highlight {
+  color: var(--dakar-yellow);
+}
+.chrono-val.eta-color {
+  color: #00E5FF;
+}
 .guidance-bar {
   padding: 6px 10px;
   background: #FFFFFF;
   align-items: center;
   justify-content: space-between;
 }
-
 .speed-zone-alert {
   display: flex;
   align-items: center;
@@ -461,35 +423,29 @@ body {
   padding: 3px 8px;
   border-radius: 4px;
 }
-
 .alert-triangle {
   font-size: 18px;
 }
-
 .zone-nums {
   display: flex;
   flex-direction: column;
 }
-
 .cur-zone-speed {
   font-size: 16px;
   font-weight: 900;
   color: var(--dakar-red);
   line-height: 1;
 }
-
 .max-zone-limit {
   font-size: 9px;
   font-weight: 800;
   color: var(--dakar-red);
 }
-
 .ctw-guidance {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-
 .steering-arrow {
   font-size: 26px;
   font-weight: 900;
@@ -497,12 +453,10 @@ body {
   display: inline-block;
   transition: transform 0.2s ease;
 }
-
 .ctw-info {
   display: flex;
   flex-direction: column;
 }
-
 .ctw-angle {
   font-family: var(--font-mono);
   font-size: 18px;
@@ -511,33 +465,27 @@ body {
   padding: 0 4px;
   border: 1px solid #000;
 }
-
 .dtw-box {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
-
 .dtw-num-row {
   display: flex;
   align-items: baseline;
   gap: 2px;
 }
-
 .dtw-num {
   font-family: var(--font-mono);
   font-size: 26px;
   font-weight: 900;
   color: var(--dakar-blue);
 }
-
 .dtw-unit {
   font-size: 10px;
   font-weight: 800;
   color: var(--dakar-blue);
 }
-
-/* Screen Footer Bar (Screenshot 1) */
 .unik4-footer-bar {
   background: #EFEFEF;
   padding: 3px 8px;
@@ -548,14 +496,11 @@ body {
   align-items: center;
   border-bottom: 2px solid #000;
 }
-
 .foot-mid {
   font-weight: 700;
   color: #555;
   font-size: 8.5px;
 }
-
-/* Row 4: Telemetry row */
 .telemetry-row {
   background: #18191C;
   color: #FFF;
@@ -565,24 +510,19 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-
 .telem-label {
   color: #888;
   font-weight: 700;
   margin-right: 4px;
 }
-
 .telem-val {
   color: #FFF;
   font-weight: 700;
 }
-
 .telem-val.highlight {
   color: var(--dakar-yellow);
   margin-right: 8px;
 }
-
-/* CENTER / RIGHT: DAKAR ROADBOOK CONTAINER */
 .roadbook-section {
   flex: 1;
   background: #ECEFF1;
@@ -591,13 +531,11 @@ body {
   flex-direction: column;
   overflow: hidden;
 }
-
 .roadbook-container {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
-
 .roadbook-header {
   background: #FFFFFF;
   border-bottom: 2.5px solid #000;
@@ -606,19 +544,16 @@ body {
   align-items: center;
   justify-content: space-between;
 }
-
 .rb-stage-title {
   font-size: 16px;
   font-weight: 900;
   color: #000;
   letter-spacing: 0.5px;
 }
-
 .rb-meta-badges {
   display: flex;
   gap: 8px;
 }
-
 .meta-pill {
   font-family: var(--font-mono);
   font-size: 12px;
@@ -628,19 +563,15 @@ body {
   padding: 3px 8px;
   border-radius: 3px;
 }
-
 .roadbook-table-container {
   flex: 1;
   overflow-y: auto;
   background: #FFF;
 }
-
-/* 3-COLUMN TABLE */
 .dakar-roadbook-table {
   width: 100%;
   border-collapse: collapse;
 }
-
 .dakar-roadbook-table thead th {
   background: #111215;
   color: #FFF;
@@ -650,12 +581,9 @@ body {
   border: 1px solid #333;
   letter-spacing: 0.5px;
 }
-
 .col-distance { width: 140px; }
 .col-tulip { width: 180px; }
 .col-lexicon { width: auto; }
-
-/* NOTE ROW */
 .note-row {
   height: 110px;
   border-bottom: 2px solid #000;
@@ -663,18 +591,14 @@ body {
   cursor: pointer;
   transition: background 0.15s ease;
 }
-
 .note-row:hover {
   background: rgba(0, 112, 243, 0.04);
 }
-
 .note-row.active {
   background: rgba(0, 112, 243, 0.1) !important;
   outline: 3px solid var(--dakar-blue);
   outline-offset: -3px;
 }
-
-/* BIFFAGE: Diagonal co-driver strikethrough slash */
 .note-row.biffed::after {
   content: "";
   position: absolute;
@@ -686,25 +610,20 @@ body {
   background: linear-gradient(to top right, transparent calc(50% - 2.5px), #000000 calc(50% - 2px), #000000 calc(50% + 2px), transparent calc(50% + 2.5px));
   opacity: 0.85;
 }
-
 .note-row td {
   border-right: 2px solid #000;
   vertical-align: top;
   padding: 6px;
 }
-
 .note-row td:last-child {
   border-right: none;
 }
-
-/* Col 1 Content */
 .cell-distance {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
 }
-
 .total-distance-box {
   text-align: right;
   font-family: var(--font-mono);
@@ -713,13 +632,11 @@ body {
   line-height: 1;
   color: #000;
 }
-
 .partial-distance-row {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
 }
-
 .note-badge-seq {
   background: #000;
   color: #FFF;
@@ -728,15 +645,12 @@ body {
   padding: 2px 7px;
   border-radius: 2px;
 }
-
 .partial-distance-num {
   font-family: var(--font-mono);
   font-size: 18px;
   font-weight: 800;
   color: #000;
 }
-
-/* Col 2 Content: SVG Tulip Diagram */
 .cell-tulip {
   display: flex;
   align-items: center;
@@ -745,12 +659,10 @@ body {
   height: 100%;
   background: #FFF;
 }
-
 .tulip-svg {
   width: 100%;
   height: 98px;
 }
-
 .tulip-cap-badge {
   position: absolute;
   top: 4px;
@@ -763,21 +675,17 @@ body {
   padding: 1px 5px;
   border: 1.2px solid #000;
 }
-
-/* Col 3 Content: FIA Lexicon & Dangers */
 .cell-lexicon {
   display: flex;
   flex-direction: column;
   gap: 4px;
   height: 100%;
 }
-
 .lex-row-top {
   display: flex;
   align-items: center;
   gap: 6px;
 }
-
 .wpt-stamp {
   width: 26px;
   height: 26px;
@@ -789,19 +697,16 @@ body {
   font-size: 8px;
   font-weight: 900;
 }
-
 .wpt-stamp.dz {
   background: var(--dakar-green);
   color: #FFF;
   border-color: var(--dakar-green);
 }
-
 .wpt-stamp.cp {
   border-color: var(--dakar-purple);
   color: var(--dakar-purple);
   border-width: 2px;
 }
-
 .speed-circle {
   width: 26px;
   height: 26px;
@@ -815,7 +720,6 @@ body {
   color: #000;
   background: #FFF;
 }
-
 .danger-marks {
   font-family: 'Times New Roman', serif;
   font-size: 24px;
@@ -823,13 +727,11 @@ body {
   color: var(--dakar-red);
   line-height: 1;
 }
-
 .lex-codes-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
 }
-
 .lex-tag {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -840,12 +742,10 @@ body {
   background: #EEE;
   color: #000;
 }
-
 .lex-tag.hp { background: #FFE0B2; }
 .lex-tag.sa, .lex-tag.dn { background: #FFF9C4; }
 .lex-tag.dz { background: #C8E6C9; }
 .lex-tag.fz { background: #CFD8DC; }
-
 .instruction-text {
   font-size: 10px;
   font-weight: 800;
@@ -853,19 +753,15 @@ body {
   text-transform: uppercase;
   margin-top: auto;
 }
-
-/* SATELLITE MAP VIEW */
 .map-section {
   flex: 1;
   position: relative;
   background: #111;
 }
-
 .map-viewport {
   width: 100%;
   height: 100%;
 }
-
 .map-floating-overlay {
   position: absolute;
   top: 14px;
@@ -875,7 +771,6 @@ body {
   flex-direction: column;
   gap: 8px;
 }
-
 .layer-selector {
   display: flex;
   background: rgba(0, 0, 0, 0.85);
@@ -884,7 +779,6 @@ body {
   border: 1px solid #444;
   gap: 2px;
 }
-
 .layer-btn {
   background: transparent;
   color: #AAA;
@@ -895,12 +789,10 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
-
 .layer-btn.active {
   background: var(--dakar-yellow);
   color: #000;
 }
-
 .recenter-btn {
   background: rgba(0, 0, 0, 0.85);
   color: #FFF;
@@ -911,8 +803,6 @@ body {
   border-radius: 6px;
   cursor: pointer;
 }
-
-/* BOTTOM: DAKAR ERTF TÉLÉCOMMANDE (Screenshot 1) */
 .telecommande-footer {
   height: 62px;
   background: #18191D;
@@ -922,25 +812,21 @@ body {
   justify-content: center;
   z-index: 100;
 }
-
 .remote-inner {
   display: flex;
   align-items: center;
   gap: 16px;
 }
-
 .remote-divider {
   width: 2px;
   height: 38px;
   background: #333640;
 }
-
 .remote-btn-group {
   display: flex;
   gap: 8px;
   align-items: center;
 }
-
 .dakar-key {
   border: none;
   font-family: var(--font-digital);
@@ -954,32 +840,27 @@ body {
   box-shadow: 0 4px 10px rgba(0,0,0,0.5), inset 0 2px 2px rgba(255,255,255,0.2);
   transition: transform 0.1s ease, filter 0.15s ease;
 }
-
 .dakar-key:active {
   transform: scale(0.92);
 }
-
 .key-esc {
   width: 44px;
   height: 44px;
   background: var(--dakar-red);
   color: #FFF;
 }
-
 .key-ok {
   width: 44px;
   height: 44px;
   background: var(--dakar-green);
   color: #000;
 }
-
 .key-stn {
   width: 44px;
   height: 44px;
   background: var(--dakar-yellow);
   color: #000;
 }
-
 .key-rst {
   width: 46px;
   height: 44px;
@@ -990,7 +871,6 @@ body {
   line-height: 1.1;
   text-align: center;
 }
-
 .key-calib {
   border-radius: 6px;
   background: #343844;
@@ -998,11 +878,9 @@ body {
   padding: 10px 14px;
   font-size: 12px;
 }
-
 .key-calib:hover {
   background: #464C5C;
 }
-
 .key-nav {
   border-radius: 6px;
   background: var(--dakar-blue);
@@ -1010,12 +888,9 @@ body {
   padding: 10px 14px;
   font-size: 11px;
 }
-
 .key-nav:hover {
   background: #0060DF;
 }
-
-/* MODALS */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -1029,7 +904,6 @@ body {
   z-index: 2000;
   backdrop-filter: blur(4px);
 }
-
 .modal-card {
   background: #1C1E24;
   border: 2px solid #363A46;
@@ -1042,11 +916,9 @@ body {
   overflow: hidden;
   box-shadow: 0 20px 50px rgba(0,0,0,0.9);
 }
-
 .lexicon-card {
   max-width: 820px;
 }
-
 .modal-header {
   background: #121317;
   padding: 14px 18px;
@@ -1055,13 +927,11 @@ body {
   justify-content: space-between;
   border-bottom: 2px solid #2B2E37;
 }
-
 .modal-header h3 {
   font-family: var(--font-digital);
   font-size: 15px;
   color: var(--dakar-yellow);
 }
-
 .close-modal-btn {
   background: transparent;
   border: none;
@@ -1069,38 +939,32 @@ body {
   font-size: 18px;
   cursor: pointer;
 }
-
 .modal-body {
   padding: 18px;
   overflow-y: auto;
 }
-
 .modal-desc {
   font-size: 12px;
   color: #AAA;
   margin-bottom: 14px;
   line-height: 1.5;
 }
-
 .input-form {
   display: flex;
   flex-direction: column;
   gap: 12px;
   margin-bottom: 20px;
 }
-
 .input-row {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
-
 .input-row label {
   font-size: 11px;
   font-weight: 700;
   color: #DDD;
 }
-
 .input-row input {
   background: #111215;
   border: 1px solid #444957;
@@ -1109,7 +973,6 @@ body {
   color: #FFF;
   font-size: 13px;
 }
-
 .btn-primary {
   background: var(--dakar-orange);
   color: #FFF;
@@ -1121,17 +984,14 @@ body {
   cursor: pointer;
   transition: background 0.2s;
 }
-
 .btn-primary:hover {
   background: #FF6A00;
 }
-
 .preset-section h4 {
   font-size: 12px;
   color: var(--dakar-yellow);
   margin-bottom: 10px;
 }
-
 .stage-card {
   background: #121317;
   border: 1px solid #2F333E;
@@ -1142,19 +1002,16 @@ body {
   justify-content: space-between;
   margin-bottom: 8px;
 }
-
 .stage-info strong {
   font-size: 12px;
   color: #FFF;
   display: block;
 }
-
 .stage-info p {
   font-size: 11px;
   color: #888;
   margin-top: 2px;
 }
-
 .load-stage-btn {
   background: #252832;
   border: 1px solid #454B5C;
@@ -1165,19 +1022,15 @@ body {
   font-weight: 800;
   cursor: pointer;
 }
-
 .load-stage-btn:hover {
   background: var(--dakar-blue);
 }
-
-/* LEXICON GRID (Screenshots 2 & 3) */
 .lexicon-filter-bar {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
   margin-bottom: 14px;
 }
-
 .lex-cat-btn {
   background: #121317;
   border: 1px solid #333644;
@@ -1188,19 +1041,16 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
-
 .lex-cat-btn.active {
   background: var(--dakar-yellow);
   color: #000;
   border-color: var(--dakar-yellow);
 }
-
 .lexicon-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   gap: 8px;
 }
-
 .lexicon-card-item {
   background: #121317;
   border: 1px solid #2B2E38;
@@ -1210,7 +1060,6 @@ body {
   align-items: center;
   gap: 10px;
 }
-
 .lex-item-code {
   background: var(--dakar-yellow);
   color: #000;
@@ -1222,24 +1071,19 @@ body {
   min-width: 45px;
   text-align: center;
 }
-
 .lex-item-names {
   display: flex;
   flex-direction: column;
 }
-
 .lex-name-en {
   font-size: 12px;
   font-weight: 700;
   color: #FFF;
 }
-
 .lex-name-fr {
   font-size: 10px;
   color: #888;
 }
-
-/* RESPONSIVE LAYOUTS FOR SPLIT / UNIK4 / ROADBOOK / MAP */
 body.mode-unik4 .roadbook-section,
 body.mode-unik4 .map-section {
   display: none !important;
@@ -1249,17 +1093,14 @@ body.mode-unik4 .device-section {
   max-width: 700px;
   margin: 0 auto;
 }
-
 body.mode-roadbook .device-section,
 body.mode-roadbook .map-section {
   display: none !important;
 }
-
 body.mode-map .device-section,
 body.mode-map .roadbook-section {
   display: none !important;
 }
-
 @media (max-width: 900px) {
   .main-workspace {
     flex-direction: column;

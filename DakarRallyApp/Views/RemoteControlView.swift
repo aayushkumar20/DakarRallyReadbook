@@ -1,15 +1,11 @@
 import SwiftUI
-
 public struct RemoteControlView: View {
     @ObservedObject var locationService: LocationService
-    
     public init(locationService: LocationService) {
         self.locationService = locationService
     }
-    
     public var body: some View {
         VStack(spacing: 6) {
-            // Bezel Top
             HStack {
                 Text("TÉLÉCOMMANDE ERTF")
                     .font(.system(size: 9, weight: .black, design: .monospaced))
@@ -20,12 +16,8 @@ public struct RemoteControlView: View {
                     .foregroundColor(.gray)
             }
             .padding(.horizontal, 8)
-            
-            // Row 1: ESC, OK, STN (Sentinel / Overtake)
             HStack(spacing: 12) {
-                // ESC
                 Button(action: {
-                    // Escape action / center view
                 }) {
                     Text("ESC")
                         .font(.system(size: 11, weight: .black))
@@ -35,8 +27,6 @@ public struct RemoteControlView: View {
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color.white.opacity(0.3), lineWidth: 2))
                 }
-                
-                // OK
                 Button(action: {
                     if let stage = locationService.activeStage, stage.notes.indices.contains(locationService.telemetry.currentNoteIndex) {
                         locationService.toggleBiffage(for: locationService.telemetry.currentNoteIndex)
@@ -50,8 +40,6 @@ public struct RemoteControlView: View {
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color.white.opacity(0.3), lineWidth: 2))
                 }
-                
-                // STN (Sentinel Overtake Alarm)
                 Button(action: {
                     SoundEffectManager.shared.playDangerAlert()
                 }) {
@@ -63,10 +51,7 @@ public struct RemoteControlView: View {
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color.white.opacity(0.3), lineWidth: 2))
                 }
-                
                 Spacer()
-                
-                // TRIP RST (Reset Partial Odometer)
                 Button(action: {
                     locationService.resetPartialOdo()
                 }) {
@@ -82,10 +67,7 @@ public struct RemoteControlView: View {
                     .cornerRadius(8)
                 }
             }
-            
-            // Row 2: Note Nav & ODO Calibration Controls
             HStack(spacing: 8) {
-                // Odo + 0.01 / 0.10
                 HStack(spacing: 4) {
                     Button(action: { locationService.adjustTotalOdo(by: 0.10) }) {
                         Text("+0.10")
@@ -106,10 +88,7 @@ public struct RemoteControlView: View {
                             .cornerRadius(6)
                     }
                 }
-                
                 Spacer()
-                
-                // Note Prev / Next buttons
                 HStack(spacing: 6) {
                     Button(action: { locationService.previousNote() }) {
                         HStack(spacing: 2) {
@@ -123,7 +102,6 @@ public struct RemoteControlView: View {
                         .background(Color.blue)
                         .cornerRadius(6)
                     }
-                    
                     Button(action: { locationService.nextNote() }) {
                         HStack(spacing: 2) {
                             Text("NOTE +")

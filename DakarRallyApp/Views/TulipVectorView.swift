@@ -1,108 +1,102 @@
 import SwiftUI
-
 public struct TulipVectorView: View {
     public let tulip: TulipDiagram
     public var isHighlighted: Bool = false
     public var noteId: Int = 1
-    
     public init(tulip: TulipDiagram, isHighlighted: Bool = false, noteId: Int = 1) {
         self.tulip = tulip
         self.isHighlighted = isHighlighted
         self.noteId = noteId
     }
-    
     public var body: some View {
         ZStack {
-            // Background box
             Rectangle()
                 .fill(Color.white)
-            
-            // Vector Track & Direction Arrow
             GeometryReader { geo in
                 let w = geo.size.width
                 let h = geo.size.height
                 let startX = w * 0.5
                 let startY = h * 0.88
-                
                 Canvas { context, size in
                     let trackColor = Color.black
                     let strokeWidth: CGFloat = 3.2
-                    
-                    // Incoming track
                     var incomingPath = Path()
                     incomingPath.move(to: CGPoint(x: startX, y: startY))
                     incomingPath.addLine(to: CGPoint(x: startX, y: h * 0.52))
-                    
                     if tulip.isOffTrack {
                         context.stroke(incomingPath, with: .color(trackColor), style: StrokeStyle(lineWidth: strokeWidth, dash: [6, 4]))
                     } else {
                         context.stroke(incomingPath, with: .color(trackColor), style: StrokeStyle(lineWidth: strokeWidth))
                     }
-                    
-                    // Outgoing turn branch
                     var branchPath = Path()
                     let junction = CGPoint(x: startX, y: h * 0.52)
                     branchPath.move(to: junction)
-                    
                     let endPoint: CGPoint
                     switch tulip.turnType {
                     case .straight, .offTrackStraight:
                         endPoint = CGPoint(x: startX, y: h * 0.16)
                         branchPath.addLine(to: endPoint)
-                        
                     case .slightRight, .forkRight:
                         endPoint = CGPoint(x: w * 0.82, y: h * 0.22)
                         branchPath.addQuadCurve(to: endPoint, control: CGPoint(x: startX + 12, y: h * 0.38))
-                        // Secondary straight ghost
                         var straightGhost = Path()
                         straightGhost.move(to: junction)
                         straightGhost.addLine(to: CGPoint(x: startX, y: h * 0.22))
                         context.stroke(straightGhost, with: .color(.gray.opacity(0.4)), style: StrokeStyle(lineWidth: 1.8, dash: [4, 4]))
-                        
                     case .right:
                         endPoint = CGPoint(x: w * 0.88, y: h * 0.44)
                         branchPath.addQuadCurve(to: endPoint, control: CGPoint(x: startX + 18, y: h * 0.52))
-                        
                     case .sharpRight, .hairpinRight:
                         endPoint = CGPoint(x: w * 0.82, y: h * 0.74)
                         branchPath.addQuadCurve(to: endPoint, control: CGPoint(x: w * 0.90, y: h * 0.50))
-                        
                     case .slightLeft, .forkLeft, .offTrackLeft:
                         endPoint = CGPoint(x: w * 0.18, y: h * 0.22)
                         branchPath.addQuadCurve(to: endPoint, control: CGPoint(x: startX - 12, y: h * 0.38))
-                        // Secondary straight ghost
                         var straightGhost = Path()
                         straightGhost.move(to: junction)
                         straightGhost.addLine(to: CGPoint(x: startX, y: h * 0.22))
                         context.stroke(straightGhost, with: .color(.gray.opacity(0.4)), style: StrokeStyle(lineWidth: 1.8, dash: [4, 4]))
-                        
                     case .left:
                         endPoint = CGPoint(x: w * 0.12, y: h * 0.44)
                         branchPath.addQuadCurve(to: endPoint, control: CGPoint(x: startX - 18, y: h * 0.52))
-                        
                     case .sharpLeft, .hairpinLeft:
                         endPoint = CGPoint(x: w * 0.18, y: h * 0.74)
                         branchPath.addQuadCurve(to: endPoint, control: CGPoint(x: w * 0.10, y: h * 0.50))
-                        
                     case .offTrackRight:
                         endPoint = CGPoint(x: w * 0.80, y: h * 0.28)
                         branchPath.addLine(to: endPoint)
                     }
-                    
                     if tulip.isOffTrack {
                         context.stroke(branchPath, with: .color(trackColor), style: StrokeStyle(lineWidth: strokeWidth, dash: [6, 4]))
                     } else {
                         context.stroke(branchPath, with: .color(trackColor), style: StrokeStyle(lineWidth: strokeWidth))
                     }
-                    
-                    // Arrow Head
                     drawArrowHead(context: context, at: endPoint, turnType: tulip.turnType)
                 }
             }
-            
-            // Inca Stage 01 Landmark details (Screenshot 4 exact replica)
+            if tulip.hasDuneRidge || tulip.duneCount > 0 {
+                VStack(spacing: 4) {
+                    Spacer().frame(height: 32)
+                    ForEach(0..<(max(1, tulip.duneCount)), id: \.self) { _ in
+                        FIASymbolIcons.DuneRidgeShape()
+                    }
+                    Spacer()
+                }
+            }
+            if let secText = tulip.secondaryBranchText {
+                VStack {
+                    Spacer().frame(height: 42)
+                    HStack {
+                        Spacer()
+                        Text("\\\(secText)")
+                            .font(.system(size: 11, weight: .black, design: .monospaced))
+                            .foregroundColor(.black)
+                            .padding(.trailing, 10)
+                    }
+                    Spacer()
+                }
+            }
             if noteId == 1 {
-                // START and CLOCK circles beside the outgoing branch
                 HStack {
                     Spacer()
                     VStack(spacing: 2) {
@@ -112,7 +106,6 @@ public struct TulipVectorView: View {
                     .padding(.trailing, 8)
                 }
             } else if noteId == 2 {
-                // Stepped terrace landmark from Screenshot 4 Note 2
                 VStack {
                     HStack {
                         Spacer()
@@ -125,8 +118,6 @@ public struct TulipVectorView: View {
                     Spacer()
                 }
             }
-            
-            // Yellow Highlighted CAP Bearing Box (Real Dakar style e.g. 87°, 108°, 286°)
             if tulip.headingCAP > 0 {
                 VStack {
                     HStack {
@@ -155,8 +146,6 @@ public struct TulipVectorView: View {
                     Spacer()
                 }
             }
-            
-            // Additional labels (e.g. "PLATEAU", "SA", "250m", "TRACKS")
             if !tulip.extraLabels.isEmpty {
                 VStack {
                     Spacer()
@@ -177,11 +166,9 @@ public struct TulipVectorView: View {
         }
         .frame(minWidth: 80, minHeight: 90)
     }
-    
     private func drawArrowHead(context: GraphicsContext, at point: CGPoint, turnType: TurnType) {
         var arrow = Path()
         let size: CGFloat = 8.0
-        
         switch turnType {
         case .straight, .offTrackStraight:
             arrow.move(to: CGPoint(x: point.x, y: point.y - size))

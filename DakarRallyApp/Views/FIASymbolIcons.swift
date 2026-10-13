@@ -1,9 +1,5 @@
 import SwiftUI
-
-/// Vector-drawn exact FIA Dakar symbols matching Screenshots 2 & 3
 public enum FIASymbolIcons {
-    
-    // MARK: - Undulations (∿∿)
     public struct UndulationIcon: View {
         public var body: some View {
             Canvas { context, size in
@@ -18,8 +14,6 @@ public enum FIASymbolIcons {
             .frame(width: 24, height: 14)
         }
     }
-    
-    // MARK: - Ruts ({ })
     public struct RutsIcon: View {
         public var body: some View {
             HStack(spacing: 4) {
@@ -31,20 +25,15 @@ public enum FIASymbolIcons {
             .foregroundColor(.black)
         }
     }
-    
-    // MARK: - Compression (⤓)
     public struct CompressionIcon: View {
         public var body: some View {
             Canvas { context, size in
                 let w = size.width
                 let h = size.height
-                // Ground baseline
                 var base = Path()
                 base.move(to: CGPoint(x: 2, y: h - 2))
                 base.addLine(to: CGPoint(x: w - 2, y: h - 2))
                 context.stroke(base, with: .color(.black), lineWidth: 2)
-                
-                // Downward compression arrow
                 var arrow = Path()
                 arrow.move(to: CGPoint(x: w * 0.5, y: 2))
                 arrow.addLine(to: CGPoint(x: w * 0.5, y: h - 5))
@@ -56,8 +45,6 @@ public enum FIASymbolIcons {
             .frame(width: 16, height: 16)
         }
     }
-    
-    // MARK: - Dip (‿)
     public struct DipIcon: View {
         public var body: some View {
             Canvas { context, size in
@@ -73,8 +60,6 @@ public enum FIASymbolIcons {
             .frame(width: 22, height: 14)
         }
     }
-    
-    // MARK: - Ditch (⎵)
     public struct DitchIcon: View {
         public var body: some View {
             Canvas { context, size in
@@ -92,8 +77,6 @@ public enum FIASymbolIcons {
             .frame(width: 22, height: 14)
         }
     }
-    
-    // MARK: - Step Down (↴)
     public struct StepDownIcon: View {
         public var body: some View {
             Canvas { context, size in
@@ -105,8 +88,6 @@ public enum FIASymbolIcons {
                 p.addLine(to: CGPoint(x: w * 0.5, y: h - 3))
                 p.addLine(to: CGPoint(x: w - 2, y: h - 3))
                 context.stroke(p, with: .color(.black), lineWidth: 2)
-                
-                // Down arrow
                 var arr = Path()
                 arr.move(to: CGPoint(x: w * 0.7, y: 5))
                 arr.addLine(to: CGPoint(x: w * 0.85, y: 10))
@@ -116,24 +97,46 @@ public enum FIASymbolIcons {
             .frame(width: 22, height: 16)
         }
     }
-    
-    // MARK: - Dunes (DN)
-    public struct DunesIcon: View {
+    public struct DownhillArrowIcon: View {
+        public var body: some View {
+            Canvas { context, size in
+                let w = size.width
+                let h = size.height
+                var tail = Path()
+                tail.move(to: CGPoint(x: 2, y: 7))
+                tail.addLine(to: CGPoint(x: 7, y: 2))
+                context.stroke(tail, with: .color(.black), lineWidth: 2.8)
+                var shaft = Path()
+                shaft.move(to: CGPoint(x: 4.5, y: 4.5))
+                shaft.addLine(to: CGPoint(x: w - 4, y: h - 4))
+                context.stroke(shaft, with: .color(.black), lineWidth: 2.8)
+                var head = Path()
+                head.move(to: CGPoint(x: w - 2, y: h - 2))
+                head.addLine(to: CGPoint(x: w - 9, y: h - 2))
+                head.addLine(to: CGPoint(x: w - 2, y: h - 9))
+                head.closeSubpath()
+                context.fill(head, with: .color(.black))
+            }
+            .frame(width: 22, height: 22)
+        }
+    }
+    public struct DuneRidgeShape: View {
         public var body: some View {
             Canvas { context, size in
                 let w = size.width
                 let h = size.height
                 var p = Path()
-                p.move(to: CGPoint(x: 2, y: h - 3))
-                p.addQuadCurve(to: CGPoint(x: w * 0.5, y: 4), control: CGPoint(x: w * 0.25, y: 4))
-                p.addQuadCurve(to: CGPoint(x: w - 2, y: h - 3), control: CGPoint(x: w * 0.75, y: h - 2))
-                context.stroke(p, with: .color(.black), lineWidth: 2)
+                p.move(to: CGPoint(x: 0, y: h * 0.75))
+                p.addCurve(to: CGPoint(x: w * 0.45, y: h * 0.15), control1: CGPoint(x: w * 0.15, y: h * 0.7), control2: CGPoint(x: w * 0.30, y: h * 0.2))
+                p.addCurve(to: CGPoint(x: w, y: h * 0.8), control1: CGPoint(x: w * 0.65, y: h * 0.1), control2: CGPoint(x: w * 0.85, y: h * 0.65))
+                p.addLine(to: CGPoint(x: w, y: h))
+                p.addLine(to: CGPoint(x: 0, y: h))
+                p.closeSubpath()
+                context.fill(p, with: .color(Color(white: 0.55)))
             }
-            .frame(width: 24, height: 14)
+            .frame(width: 44, height: 16)
         }
     }
-    
-    // MARK: - Clock Icon
     public struct ClockIcon: View {
         public var body: some View {
             ZStack {
@@ -151,8 +154,6 @@ public enum FIASymbolIcons {
             }
         }
     }
-    
-    // MARK: - Start Flag Circle Icon
     public struct StartFlagIcon: View {
         public var body: some View {
             ZStack {
@@ -165,8 +166,6 @@ public enum FIASymbolIcons {
             }
         }
     }
-    
-    // MARK: - Checkpoint Badge (CP)
     public struct CheckpointBadge: View {
         public var text: String = "CP"
         public var body: some View {

@@ -1,14 +1,11 @@
 import SwiftUI
-
 public struct LexiconReferenceSheet: View {
     @Environment(\.dismiss) var dismiss
     @State private var selectedCategory: LexiconCategory = .tracks
     @State private var searchText: String = ""
-    
     public var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                // Category Picker
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 6) {
                         ForEach(LexiconCategory.allCases, id: \.self) { cat in
@@ -27,8 +24,6 @@ public struct LexiconReferenceSheet: View {
                     .padding(.vertical, 8)
                 }
                 .background(Color.black)
-                
-                // Search Field
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.gray)
@@ -38,8 +33,6 @@ public struct LexiconReferenceSheet: View {
                 .padding(8)
                 .background(Color(red: 0.92, green: 0.92, blue: 0.95))
                 .border(Color.gray.opacity(0.3), width: 1)
-                
-                // Lexicon items list matching screenshots 2 & 3
                 List {
                     ForEach(filteredItems) { item in
                         HStack(spacing: 12) {
@@ -51,7 +44,6 @@ public struct LexiconReferenceSheet: View {
                                 .padding(.vertical, 3)
                                 .background(Color(red: 1.0, green: 0.92, blue: 0.15))
                                 .border(Color.black, width: 1)
-                            
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(item.englishName)
                                     .font(.system(size: 13, weight: .bold))
@@ -60,7 +52,6 @@ public struct LexiconReferenceSheet: View {
                                     .font(.system(size: 11))
                                     .foregroundColor(.secondary)
                             }
-                            
                             Spacer()
                         }
                         .padding(.vertical, 2)
@@ -72,7 +63,6 @@ public struct LexiconReferenceSheet: View {
             .navigationBarItems(trailing: Button("Done") { dismiss() })
         }
     }
-    
     private var filteredItems: [LexiconItem] {
         let list = FIALexicon.items.filter { item in
             if !searchText.isEmpty {
