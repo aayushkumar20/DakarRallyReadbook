@@ -34,7 +34,7 @@ jobs:
 
       - name: Validate Project Configuration
         run: |
-          python3 -c "import yaml; yaml.safe_load(open('project.yml'))"
+          ruby -ryaml -e "YAML.load_file('project.yml')" || (python3 -m pip install pyyaml --quiet && python3 -c "import yaml; yaml.safe_load(open('project.yml'))")
 
   build-ipa:
     name: Build & Package iOS IPA
