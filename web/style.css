@@ -537,6 +537,24 @@ body {
   color: var(--dakar-blue);
 }
 
+/* Screen Footer Bar (Screenshot 1) */
+.unik4-footer-bar {
+  background: #EFEFEF;
+  padding: 3px 8px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 900;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #000;
+}
+
+.foot-mid {
+  font-weight: 700;
+  color: #555;
+  font-size: 8.5px;
+}
+
 /* Row 4: Telemetry row */
 .telemetry-row {
   background: #18191C;

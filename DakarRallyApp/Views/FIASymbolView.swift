@@ -22,9 +22,9 @@ public struct FIASymbolView: View {
     }
     
     public var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 3) {
             // Top row: Waypoint type icon & Danger symbols
-            HStack(spacing: 6) {
+            HStack(spacing: 5) {
                 // Waypoint Stamp
                 if let wp = waypointType {
                     waypointBadge(for: wp)
@@ -34,9 +34,9 @@ public struct FIASymbolView: View {
                 if let limit = speedLimit {
                     ZStack {
                         Circle()
-                            .stroke(Color.red, lineWidth: 3)
+                            .stroke(Color.red, lineWidth: 2.5)
                             .background(Circle().fill(Color.white))
-                            .frame(width: 28, height: 28)
+                            .frame(width: 26, height: 26)
                         Text("\(limit)")
                             .font(.system(size: 11, weight: .black))
                             .foregroundColor(.black)
@@ -48,27 +48,43 @@ public struct FIASymbolView: View {
                     HStack(spacing: 1) {
                         ForEach(0..<danger.rawValue, id: \.self) { _ in
                             Text("!")
-                                .font(.system(size: 20, weight: .black, design: .serif))
+                                .font(.system(size: 22, weight: .black, design: .serif))
                                 .foregroundColor(.red)
                         }
                     }
-                    .padding(.horizontal, 2)
+                }
+                
+                // Graphical symbol icons matching screenshots 2, 3, 4
+                if lexiconCodes.contains("OND") {
+                    FIASymbolIcons.UndulationIcon()
+                }
+                if lexiconCodes.contains("ORNI") {
+                    FIASymbolIcons.RutsIcon()
+                }
+                if lexiconCodes.contains("COMP") {
+                    FIASymbolIcons.CompressionIcon()
+                }
+                if lexiconCodes.contains("DIP") {
+                    FIASymbolIcons.DipIcon()
+                }
+                if lexiconCodes.contains("FOSS") {
+                    FIASymbolIcons.DitchIcon()
                 }
                 
                 Spacer()
             }
             
             // Middle row: FIA Lexicon Acronyms
-            if !lexiconCodes.isEmpty {
-                HStack(spacing: 4) {
+            if !filteredCodes.isEmpty {
+                HStack(spacing: 3) {
                     ForEach(filteredCodes, id: \.self) { code in
                         Text(code)
-                            .font(.system(size: 12, weight: .black, design: .monospaced))
+                            .font(.system(size: 11, weight: .black, design: .monospaced))
                             .foregroundColor(.black)
                             .padding(.horizontal, 4)
                             .padding(.vertical, 1)
                             .background(backgroundColor(for: code))
-                            .cornerRadius(2)
+                            .border(Color.black, width: 0.8)
                     }
                 }
             }
@@ -76,7 +92,7 @@ public struct FIASymbolView: View {
             // Bottom row: Textual co-driver notes / instructions
             if !textComment.isEmpty {
                 Text(textComment)
-                    .font(.system(size: 10, weight: .bold))
+                    .font(.system(size: 9.5, weight: .bold))
                     .foregroundColor(.black)
                     .lineLimit(2)
                     .textCase(.uppercase)
@@ -90,63 +106,58 @@ public struct FIASymbolView: View {
     }
     
     private var filteredCodes: [String] {
-        lexiconCodes.filter { $0 != "!" && $0 != "!!" && $0 != "!!!" && $0 != "START" && $0 != "FINISH" }
+        lexiconCodes.filter {
+            $0 != "!" && $0 != "!!" && $0 != "!!!" &&
+            $0 != "START" && $0 != "FINISH" &&
+            $0 != "OND" && $0 != "ORNI" && $0 != "COMP" && $0 != "DIP" && $0 != "FOSS"
+        }
     }
     
     @ViewBuilder
     private func waypointBadge(for wp: WaypointType) -> some View {
         switch wp {
         case .start:
-            ZStack {
-                Circle().stroke(Color.black, lineWidth: 1.5).frame(width: 26, height: 26)
-                Text("START")
-                    .font(.system(size: 7, weight: .black))
-            }
+            FIASymbolIcons.StartFlagIcon()
         case .finish:
             ZStack {
-                Circle().stroke(Color.black, lineWidth: 1.5).frame(width: 26, height: 26)
-                Text("FINISH")
+                Circle().stroke(Color.black, lineWidth: 2).frame(width: 24, height: 24)
+                Text("ASS")
                     .font(.system(size: 7, weight: .black))
             }
         case .wpc:
             ZStack {
-                Circle().stroke(Color.black, lineWidth: 1.5).frame(width: 26, height: 26)
+                Circle().stroke(Color.black, lineWidth: 1.8).frame(width: 24, height: 24)
                 Text("WPC")
-                    .font(.system(size: 8, weight: .black))
+                    .font(.system(size: 7.5, weight: .black))
             }
         case .wps:
             ZStack {
-                Circle().stroke(Color.black, lineWidth: 1.5).frame(width: 26, height: 26)
+                Circle().stroke(Color.black, lineWidth: 1.8).frame(width: 24, height: 24)
                 Text("WPS")
-                    .font(.system(size: 8, weight: .black))
+                    .font(.system(size: 7.5, weight: .black))
             }
         case .wpm:
             ZStack {
-                Circle().stroke(Color.black, lineWidth: 1.5).frame(width: 26, height: 26)
+                Circle().stroke(Color.black, lineWidth: 1.8).frame(width: 24, height: 24)
                 Text("WPM")
-                    .font(.system(size: 8, weight: .black))
+                    .font(.system(size: 7.5, weight: .black))
             }
         case .dz:
             ZStack {
-                Circle().fill(Color(red: 0.1, green: 0.7, blue: 0.3)).frame(width: 24, height: 24)
+                Circle().fill(Color(red: 0.1, green: 0.7, blue: 0.3)).frame(width: 22, height: 22)
                 Text("DZ")
-                    .font(.system(size: 9, weight: .black))
+                    .font(.system(size: 8.5, weight: .black))
                     .foregroundColor(.white)
             }
         case .fz:
             ZStack {
-                Circle().fill(Color.gray).frame(width: 24, height: 24)
+                Circle().fill(Color.gray).frame(width: 22, height: 22)
                 Text("FZ")
-                    .font(.system(size: 9, weight: .black))
+                    .font(.system(size: 8.5, weight: .black))
                     .foregroundColor(.white)
             }
         case .cp:
-            ZStack {
-                Circle().stroke(Color.purple, lineWidth: 2).frame(width: 26, height: 26)
-                Text("CP")
-                    .font(.system(size: 9, weight: .black))
-                    .foregroundColor(.purple)
-            }
+            FIASymbolIcons.CheckpointBadge()
         default:
             EmptyView()
         }
@@ -155,7 +166,7 @@ public struct FIASymbolView: View {
     private func backgroundColor(for code: String) -> Color {
         switch code.uppercased() {
         case "HP": return Color.orange.opacity(0.3)
-        case "SA", "DN", "DN L1", "DN L2": return Color(red: 1.0, green: 0.9, blue: 0.4).opacity(0.6)
+        case "SA", "DN", "DN L1", "DN L2": return Color(red: 1.0, green: 0.9, blue: 0.4).opacity(0.7)
         case "DZ": return Color.green.opacity(0.3)
         case "FZ": return Color.gray.opacity(0.3)
         case "PP": return Color.blue.opacity(0.2)

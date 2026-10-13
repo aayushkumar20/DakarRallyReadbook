@@ -3,15 +3,17 @@ import SwiftUI
 public struct TulipVectorView: View {
     public let tulip: TulipDiagram
     public var isHighlighted: Bool = false
+    public var noteId: Int = 1
     
-    public init(tulip: TulipDiagram, isHighlighted: Bool = false) {
+    public init(tulip: TulipDiagram, isHighlighted: Bool = false, noteId: Int = 1) {
         self.tulip = tulip
         self.isHighlighted = isHighlighted
+        self.noteId = noteId
     }
     
     public var body: some View {
         ZStack {
-            // Background grid box
+            // Background box
             Rectangle()
                 .fill(Color.white)
             
@@ -24,9 +26,9 @@ public struct TulipVectorView: View {
                 
                 Canvas { context, size in
                     let trackColor = Color.black
-                    let strokeWidth: CGFloat = 3.5
+                    let strokeWidth: CGFloat = 3.2
                     
-                    // Incoming track (vertical from bottom)
+                    // Incoming track
                     var incomingPath = Path()
                     incomingPath.move(to: CGPoint(x: startX, y: startY))
                     incomingPath.addLine(to: CGPoint(x: startX, y: h * 0.52))
@@ -37,7 +39,7 @@ public struct TulipVectorView: View {
                         context.stroke(incomingPath, with: .color(trackColor), style: StrokeStyle(lineWidth: strokeWidth))
                     }
                     
-                    // Outgoing turn direction based on turnType
+                    // Outgoing turn branch
                     var branchPath = Path()
                     let junction = CGPoint(x: startX, y: h * 0.52)
                     branchPath.move(to: junction)
@@ -49,41 +51,41 @@ public struct TulipVectorView: View {
                         branchPath.addLine(to: endPoint)
                         
                     case .slightRight, .forkRight:
-                        endPoint = CGPoint(x: w * 0.82, y: h * 0.24)
-                        branchPath.addQuadCurve(to: endPoint, control: CGPoint(x: startX + 10, y: h * 0.38))
-                        // Secondary ghost branch straight
+                        endPoint = CGPoint(x: w * 0.82, y: h * 0.22)
+                        branchPath.addQuadCurve(to: endPoint, control: CGPoint(x: startX + 12, y: h * 0.38))
+                        // Secondary straight ghost
                         var straightGhost = Path()
                         straightGhost.move(to: junction)
                         straightGhost.addLine(to: CGPoint(x: startX, y: h * 0.22))
-                        context.stroke(straightGhost, with: .color(.gray.opacity(0.5)), style: StrokeStyle(lineWidth: 2, dash: [4, 4]))
+                        context.stroke(straightGhost, with: .color(.gray.opacity(0.4)), style: StrokeStyle(lineWidth: 1.8, dash: [4, 4]))
                         
                     case .right:
                         endPoint = CGPoint(x: w * 0.88, y: h * 0.44)
-                        branchPath.addQuadCurve(to: endPoint, control: CGPoint(x: startX + 15, y: h * 0.52))
+                        branchPath.addQuadCurve(to: endPoint, control: CGPoint(x: startX + 18, y: h * 0.52))
                         
                     case .sharpRight, .hairpinRight:
-                        endPoint = CGPoint(x: w * 0.84, y: h * 0.72)
+                        endPoint = CGPoint(x: w * 0.82, y: h * 0.74)
                         branchPath.addQuadCurve(to: endPoint, control: CGPoint(x: w * 0.90, y: h * 0.50))
                         
                     case .slightLeft, .forkLeft, .offTrackLeft:
-                        endPoint = CGPoint(x: w * 0.18, y: h * 0.24)
-                        branchPath.addQuadCurve(to: endPoint, control: CGPoint(x: startX - 10, y: h * 0.38))
-                        // Secondary ghost branch straight
+                        endPoint = CGPoint(x: w * 0.18, y: h * 0.22)
+                        branchPath.addQuadCurve(to: endPoint, control: CGPoint(x: startX - 12, y: h * 0.38))
+                        // Secondary straight ghost
                         var straightGhost = Path()
                         straightGhost.move(to: junction)
                         straightGhost.addLine(to: CGPoint(x: startX, y: h * 0.22))
-                        context.stroke(straightGhost, with: .color(.gray.opacity(0.5)), style: StrokeStyle(lineWidth: 2, dash: [4, 4]))
+                        context.stroke(straightGhost, with: .color(.gray.opacity(0.4)), style: StrokeStyle(lineWidth: 1.8, dash: [4, 4]))
                         
                     case .left:
                         endPoint = CGPoint(x: w * 0.12, y: h * 0.44)
-                        branchPath.addQuadCurve(to: endPoint, control: CGPoint(x: startX - 15, y: h * 0.52))
+                        branchPath.addQuadCurve(to: endPoint, control: CGPoint(x: startX - 18, y: h * 0.52))
                         
                     case .sharpLeft, .hairpinLeft:
-                        endPoint = CGPoint(x: w * 0.16, y: h * 0.72)
+                        endPoint = CGPoint(x: w * 0.18, y: h * 0.74)
                         branchPath.addQuadCurve(to: endPoint, control: CGPoint(x: w * 0.10, y: h * 0.50))
                         
                     case .offTrackRight:
-                        endPoint = CGPoint(x: w * 0.80, y: h * 0.30)
+                        endPoint = CGPoint(x: w * 0.80, y: h * 0.28)
                         branchPath.addLine(to: endPoint)
                     }
                     
@@ -93,41 +95,79 @@ public struct TulipVectorView: View {
                         context.stroke(branchPath, with: .color(trackColor), style: StrokeStyle(lineWidth: strokeWidth))
                     }
                     
-                    // Arrow Head at the end of branchPath
-                    drawArrowHead(context: context, at: endPoint, turnType: tulip.turnType, width: w, height: h)
+                    // Arrow Head
+                    drawArrowHead(context: context, at: endPoint, turnType: tulip.turnType)
                 }
             }
             
-            // Yellow Highlighted CAP Bearing Box (Real Dakar Unik4 style e.g. 87°, 108°, 286°)
-            if tulip.headingCAP > 0 {
+            // Inca Stage 01 Landmark details (Screenshot 4 exact replica)
+            if noteId == 1 {
+                // START and CLOCK circles beside the outgoing branch
+                HStack {
+                    Spacer()
+                    VStack(spacing: 2) {
+                        FIASymbolIcons.StartFlagIcon()
+                        FIASymbolIcons.ClockIcon()
+                    }
+                    .padding(.trailing, 8)
+                }
+            } else if noteId == 2 {
+                // Stepped terrace landmark from Screenshot 4 Note 2
                 VStack {
                     HStack {
                         Spacer()
-                        Text("\(tulip.headingCAP)°")
-                            .font(.system(size: 13, weight: .black, design: .monospaced))
+                        Image(systemName: "stairs")
+                            .font(.system(size: 16))
                             .foregroundColor(.black)
-                            .padding(.horizontal, 5)
-                            .padding(.vertical, 2)
-                            .background(Color(red: 1.0, green: 0.92, blue: 0.15)) // Vivid Dakar Yellow
-                            .border(Color.black, width: 1.2)
-                            .padding(4)
+                            .padding(.trailing, 10)
+                            .padding(.top, 14)
                     }
                     Spacer()
                 }
             }
             
-            // Additional labels (e.g. "PLATEAU", "250m", "TRACKS")
+            // Yellow Highlighted CAP Bearing Box (Real Dakar style e.g. 87°, 108°, 286°)
+            if tulip.headingCAP > 0 {
+                VStack {
+                    HStack {
+                        if tulip.headingCAP >= 180 && tulip.turnType != .slightRight {
+                            Text("\(tulip.headingCAP)°")
+                                .font(.system(size: 13, weight: .black, design: .monospaced))
+                                .foregroundColor(.black)
+                                .padding(.horizontal, 4)
+                                .padding(.vertical, 1)
+                                .background(Color(red: 1.0, green: 0.92, blue: 0.15))
+                                .border(Color.black, width: 1.2)
+                                .padding(4)
+                            Spacer()
+                        } else {
+                            Spacer()
+                            Text("\(tulip.headingCAP)°")
+                                .font(.system(size: 13, weight: .black, design: .monospaced))
+                                .foregroundColor(.black)
+                                .padding(.horizontal, 4)
+                                .padding(.vertical, 1)
+                                .background(Color(red: 1.0, green: 0.92, blue: 0.15))
+                                .border(Color.black, width: 1.2)
+                                .padding(4)
+                        }
+                    }
+                    Spacer()
+                }
+            }
+            
+            // Additional labels (e.g. "PLATEAU", "SA", "250m", "TRACKS")
             if !tulip.extraLabels.isEmpty {
                 VStack {
                     Spacer()
-                    HStack(spacing: 4) {
+                    HStack(spacing: 3) {
                         ForEach(tulip.extraLabels, id: \.self) { label in
                             Text(label)
-                                .font(.system(size: 9, weight: .bold))
+                                .font(.system(size: 8.5, weight: .bold))
                                 .foregroundColor(.black)
                                 .padding(.horizontal, 3)
                                 .padding(.vertical, 1)
-                                .background(Color.white.opacity(0.85))
+                                .background(Color.white.opacity(0.9))
                         }
                         Spacer()
                     }
@@ -138,7 +178,7 @@ public struct TulipVectorView: View {
         .frame(minWidth: 80, minHeight: 90)
     }
     
-    private func drawArrowHead(context: GraphicsContext, at point: CGPoint, turnType: TurnType, width: CGFloat, height: CGFloat) {
+    private func drawArrowHead(context: GraphicsContext, at point: CGPoint, turnType: TurnType) {
         var arrow = Path()
         let size: CGFloat = 8.0
         
@@ -156,7 +196,7 @@ public struct TulipVectorView: View {
             arrow.addLine(to: CGPoint(x: point.x - size * 0.5, y: point.y - size * 0.8))
             arrow.addLine(to: CGPoint(x: point.x - size * 0.5, y: point.y + size * 0.8))
         case .sharpRight, .hairpinRight:
-            arrow.move(to: CGPoint(x: point.x, y: point.y + size))
+            arrow.move(to: CGPoint(x: point.x + size, y: point.y + size))
             arrow.addLine(to: CGPoint(x: point.x - size * 0.8, y: point.y - size * 0.5))
             arrow.addLine(to: CGPoint(x: point.x + size * 0.8, y: point.y - size * 0.5))
         case .slightLeft, .forkLeft, .offTrackLeft:
@@ -168,9 +208,9 @@ public struct TulipVectorView: View {
             arrow.addLine(to: CGPoint(x: point.x + size * 0.5, y: point.y - size * 0.8))
             arrow.addLine(to: CGPoint(x: point.x + size * 0.5, y: point.y + size * 0.8))
         case .sharpLeft, .hairpinLeft:
-            arrow.move(to: CGPoint(x: point.x, y: point.y + size))
-            arrow.addLine(to: CGPoint(x: point.x - size * 0.8, y: point.y - size * 0.5))
+            arrow.move(to: CGPoint(x: point.x - size, y: point.y + size))
             arrow.addLine(to: CGPoint(x: point.x + size * 0.8, y: point.y - size * 0.5))
+            arrow.addLine(to: CGPoint(x: point.x - size * 0.8, y: point.y - size * 0.5))
         }
         arrow.closeSubpath()
         context.fill(arrow, with: .color(.black))

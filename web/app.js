@@ -548,7 +548,7 @@ function renderRoadbookTable(notes) {
   });
 }
 
-// GENERATE SVG TULIP DIAGRAM (Accurate Dakar track vectors)
+// GENERATE SVG TULIP DIAGRAM (Accurate Dakar track vectors matching Screenshot 4)
 function generateTulipSVG(note) {
   const isOffTrack = note.isOffTrack;
   const dashAttr = isOffTrack ? 'stroke-dasharray="6,4"' : '';
@@ -588,6 +588,26 @@ function generateTulipSVG(note) {
       arrowHead = '<polygon points="90,12 85,24 95,24" fill="#000" />';
   }
 
+  // Landmark overlays from Screenshot 4
+  let extraLandmarks = '';
+  if (note.id === 1) {
+    // START circle + Clock circle beside branching arrow
+    extraLandmarks = `
+      <circle cx="115" cy="46" r="10" stroke="#000" stroke-width="1.5" fill="#FFF"/>
+      <text x="115" y="49" font-size="5" font-weight="900" text-anchor="middle">START</text>
+      <circle cx="140" cy="46" r="9" stroke="#000" stroke-width="1.5" fill="#FFF"/>
+      <line x1="140" y1="46" x2="140" y2="40" stroke="#000" stroke-width="1.5"/>
+      <line x1="140" y1="46" x2="145" y2="46" stroke="#000" stroke-width="1.5"/>
+    `;
+  } else if (note.id === 2) {
+    // Stepped terrace diagram from Note 2
+    extraLandmarks = `
+      <path d="M 105,35 L 115,35 L 115,25 L 125,25 L 125,15" stroke="#000" stroke-width="1.8" fill="none"/>
+      <line x1="130" y1="28" x2="145" y2="38" stroke="#000" stroke-width="1.5"/>
+      <line x1="135" y1="36" x2="150" y2="46" stroke="#000" stroke-width="1.5"/>
+    `;
+  }
+
   return `
     <svg class="tulip-svg" viewBox="0 0 180 98">
       <!-- Background white box -->
@@ -596,6 +616,8 @@ function generateTulipSVG(note) {
       <path d="${pathD}" fill="none" stroke="#000" stroke-width="3.8" ${dashAttr} />
       <!-- Arrow Head -->
       ${arrowHead}
+      <!-- Landmarks -->
+      ${extraLandmarks}
     </svg>
   `;
 }
@@ -675,6 +697,11 @@ function updateTelemetry() {
   document.getElementById('telemetryCoords').textContent = `${t.latitude.toFixed(4)}° N, ${t.longitude.toFixed(4)}° W`;
   document.getElementById('telemetryAlt').textContent = `${Math.round(t.altitudeM)} m`;
   document.getElementById('telemetrySlope').textContent = `${t.slopeDeg > 0 ? '+' : ''}${t.slopeDeg.toFixed(1)}°`;
+
+  const nextElem = document.getElementById('telemNextDist');
+  if (nextElem) nextElem.textContent = `NEXT ${t.dtwKM.toFixed(2)}`;
+  const footCap = document.getElementById('telemFootCap');
+  if (footCap) footCap.textContent = `Cap ${Math.round(t.ctwDeg)}°`;
 
   // Rotate CTW Steering Arrow
   const arrow = document.getElementById('steeringArrow');
@@ -818,6 +845,48 @@ function getDistanceMeters(lat1, lon1, lat2, lon2) {
             Math.sin(Δλ/2) * Math.sin(Δλ/2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
   return R * c;
+}
+
+// REAL DEVICE GPS & ORIENTATION SUPPORT
+let geoWatchId = null;
+
+function enableLiveDeviceGPS() {
+  if (!navigator.geolocation) {
+    alert("Geolocation is not supported by your browser.");
+    return;
+  }
+  stopSimulation();
+
+  geoWatchId = navigator.geolocation.watchPosition(
+    pos => {
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
+      const speedKmh = pos.coords.speed ? Math.max(0, pos.coords.speed * 3.6) : 0;
+      const heading = pos.coords.heading !== null && !isNaN(pos.coords.heading) ? pos.coords.heading : state.telemetry.headingDeg;
+      const alt = pos.coords.altitude || state.telemetry.altitudeM;
+
+      state.telemetry.latitude = lat;
+      state.telemetry.longitude = lon;
+      state.telemetry.speedKmh = speedKmh;
+      state.telemetry.headingDeg = heading;
+      state.telemetry.altitudeM = alt;
+
+      updateTelemetry();
+    },
+    err => {
+      console.warn("GPS watchPosition error:", err);
+    },
+    { enableHighAccuracy: true, maximumAge: 1000, timeout: 5000 }
+  );
+
+  if (window.DeviceOrientationEvent) {
+    window.addEventListener('deviceorientation', evt => {
+      if (evt.alpha !== null && !isNaN(evt.alpha)) {
+        state.telemetry.headingDeg = 360 - evt.alpha;
+        updateTelemetry();
+      }
+    });
+  }
 }
 
 // SETUP UI EVENT LISTENERS

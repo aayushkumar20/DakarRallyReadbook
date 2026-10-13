@@ -9,24 +9,27 @@ public struct Unik4GPSView: View {
     
     public var body: some View {
         VStack(spacing: 0) {
-            // UNIK4 Rugged Hardware Bezel Top Banner
-            HStack {
-                Text("ERTF UNIK4")
-                    .font(.system(size: 11, weight: .black, design: .monospaced))
+            // UNIK4 Rugged Hardware Bezel Top Banner with French Flag (Screenshot 1)
+            HStack(spacing: 6) {
+                Text("🇫🇷")
+                    .font(.system(size: 14))
+                Text("MEMO GPS UNIK4 RALLYE RAID – VERSION 2024")
+                    .font(.system(size: 10, weight: .black, design: .monospaced))
                     .foregroundColor(Color(red: 1.0, green: 0.92, blue: 0.15))
                 Spacer()
-                Text("RALLYE RAID GPS - FIA 2025")
-                    .font(.system(size: 10, weight: .bold))
-                    .foregroundColor(.gray)
-                Spacer()
-                // Power Indicator
+                Text("AUTO/CAMION")
+                    .font(.system(size: 9, weight: .bold))
+                    .foregroundColor(.white)
+                
+                // Power LED
                 Circle()
                     .fill(locationService.telemetry.isGpsLocked ? Color.green : Color.red)
                     .frame(width: 8, height: 8)
+                    .shadow(color: .green, radius: 2)
             }
             .padding(.horizontal, 10)
             .padding(.vertical, 4)
-            .background(Color(red: 0.12, green: 0.12, blue: 0.14))
+            .background(Color(red: 0.10, green: 0.10, blue: 0.12))
             
             // SCREEN TOP STATUS BAR (Screenshot 1: Ecran général de navigation)
             HStack(alignment: .center, spacing: 6) {
@@ -48,7 +51,7 @@ public struct Unik4GPSView: View {
                         .foregroundColor(.secondary)
                     HStack(alignment: .firstTextBaseline, spacing: 1) {
                         Text("\(Int(locationService.telemetry.currentSpeedKmh))")
-                            .font(.system(size: 20, weight: .black, design: .monospaced))
+                            .font(.system(size: 22, weight: .black, design: .monospaced))
                         Text("km/h")
                             .font(.system(size: 8, weight: .bold))
                     }
@@ -61,7 +64,7 @@ public struct Unik4GPSView: View {
                 VStack(spacing: 1) {
                     HStack(spacing: 2) {
                         Text("\(locationService.telemetry.validatedWaypointsCount)")
-                            .font(.system(size: 14, weight: .black, design: .monospaced))
+                            .font(.system(size: 15, weight: .black, design: .monospaced))
                         Image(systemName: "checkmark.square.fill")
                             .foregroundColor(.green)
                             .font(.system(size: 12))
@@ -79,20 +82,20 @@ public struct Unik4GPSView: View {
                         Text("WPT \(locationService.telemetry.targetWaypointNumber)")
                             .font(.system(size: 11, weight: .black))
                         Text(locationService.telemetry.targetWaypointCode)
-                            .font(.system(size: 12, weight: .black, design: .monospaced))
+                            .font(.system(size: 13, weight: .black, design: .monospaced))
                             .foregroundColor(.blue)
                     }
-                    Text("WAYPOINT VISÉ")
+                    Text("POINT VISÉ")
                         .font(.system(size: 7, weight: .bold))
                         .foregroundColor(.secondary)
                 }
                 
                 Spacer()
                 
-                // Cap suivi (Current heading e.g. 94° GPS)
+                // Cap suivi (Current heading e.g. 94° GPS in yellow box)
                 VStack(spacing: -1) {
                     Text("\(Int(locationService.telemetry.currentHeadingDegrees))°")
-                        .font(.system(size: 18, weight: .black, design: .monospaced))
+                        .font(.system(size: 19, weight: .black, design: .monospaced))
                         .foregroundColor(.black)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 1)
@@ -104,31 +107,31 @@ public struct Unik4GPSView: View {
                 }
             }
             .padding(.horizontal, 8)
-            .padding(.vertical, 6)
+            .padding(.vertical, 5)
             .background(Color.white)
             .border(Color.black, width: 1.5)
             
             // DUAL TRIPMASTERS / ODOS (ODO total & ODO partiel)
             HStack(spacing: 0) {
                 // Left: ODO TOTAL (e.g. 29.82 km)
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: 1) {
                     Text("ODO total")
                         .font(.system(size: 10, weight: .black))
                         .foregroundColor(Color.blue)
                     Text(String(format: "%.2f", locationService.telemetry.totalOdoKM))
-                        .font(.system(size: 38, weight: .black, design: .monospaced))
+                        .font(.system(size: 40, weight: .black, design: .monospaced))
                         .foregroundColor(.black)
                         .minimumScaleFactor(0.7)
                         .lineLimit(1)
                 }
                 .padding(.horizontal, 10)
-                .padding(.vertical, 4)
+                .padding(.vertical, 3)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Divider().frame(width: 2).background(Color.black)
                 
                 // Right: ODO PARTIEL (e.g. 0.71 km)
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: 1) {
                     HStack {
                         Text("ODO partiel")
                             .font(.system(size: 10, weight: .black))
@@ -145,13 +148,13 @@ public struct Unik4GPSView: View {
                         }
                     }
                     Text(String(format: "%.2f", locationService.telemetry.partialOdoKM))
-                        .font(.system(size: 38, weight: .black, design: .monospaced))
+                        .font(.system(size: 40, weight: .black, design: .monospaced))
                         .foregroundColor(.black)
                         .minimumScaleFactor(0.7)
                         .lineLimit(1)
                 }
                 .padding(.horizontal, 10)
-                .padding(.vertical, 4)
+                .padding(.vertical, 3)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             .background(Color(red: 0.94, green: 0.95, blue: 0.97))
@@ -159,7 +162,7 @@ public struct Unik4GPSView: View {
             
             // SPEED ZONE LIMIT (DZ-FZ) & WAYPOINT STEERING GUIDANCE (Screenshot 1 Bottom)
             HStack(spacing: 8) {
-                // Speed Limit Warning (DZ-FZ)
+                // Speed Limit Warning (DZ-FZ: e.g. 48 / 50)
                 if let limit = locationService.telemetry.activeSpeedLimit {
                     HStack(spacing: 4) {
                         Image(systemName: "exclamationmark.triangle.fill")
@@ -175,7 +178,7 @@ public struct Unik4GPSView: View {
                         }
                     }
                     .padding(.horizontal, 6)
-                    .padding(.vertical, 4)
+                    .padding(.vertical, 3)
                     .background(locationService.telemetry.isSpeedExceeded ? Color.red.opacity(0.2) : Color.white)
                     .border(Color.red, width: 2)
                 }
@@ -208,7 +211,7 @@ public struct Unik4GPSView: View {
                         .foregroundColor(.blue)
                     HStack(alignment: .firstTextBaseline, spacing: 2) {
                         Text(String(format: "%.2f", locationService.telemetry.distanceToWaypointKM))
-                            .font(.system(size: 20, weight: .black, design: .monospaced))
+                            .font(.system(size: 22, weight: .black, design: .monospaced))
                             .foregroundColor(.blue)
                         Text("km")
                             .font(.system(size: 9, weight: .bold))
@@ -217,9 +220,26 @@ public struct Unik4GPSView: View {
                 }
             }
             .padding(.horizontal, 10)
-            .padding(.vertical, 6)
+            .padding(.vertical, 5)
             .background(Color.white)
             .border(Color.black, width: 1.5)
+            
+            // SCREEN FOOTER BAR (Screenshot 1: NEXT 1,22 | EZ AUT SS - 456.74 km | 421 km)
+            HStack {
+                Text("NEXT \(String(format: "%.2f", locationService.telemetry.distanceToWaypointKM))")
+                    .font(.system(size: 9, weight: .black, design: .monospaced))
+                Spacer()
+                Text("EZ AUT SS - 456.74 km")
+                    .font(.system(size: 8.5, weight: .bold))
+                    .foregroundColor(.secondary)
+                Spacer()
+                Text("Cap \(Int(locationService.telemetry.capToWaypointDegrees))°")
+                    .font(.system(size: 9, weight: .black, design: .monospaced))
+            }
+            .padding(.horizontal, 10)
+            .padding(.vertical, 3)
+            .background(Color(red: 0.95, green: 0.95, blue: 0.95))
+            .border(Color.black, width: 1)
             
             // LIVE GPS TELEMETRY STATUS BAR (Latitude, Longitude, Altitude, Pitch)
             HStack(spacing: 12) {
@@ -253,8 +273,8 @@ public struct Unik4GPSView: View {
                 }
             }
             .padding(.horizontal, 10)
-            .padding(.vertical, 4)
-            .background(Color(red: 0.15, green: 0.15, blue: 0.17))
+            .padding(.vertical, 3)
+            .background(Color(red: 0.14, green: 0.14, blue: 0.16))
         }
         .background(Color.black)
         .border(Color.black, width: 2)

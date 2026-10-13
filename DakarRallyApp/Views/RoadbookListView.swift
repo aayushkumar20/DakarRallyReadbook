@@ -116,7 +116,7 @@ public struct RoadbookRowView: View {
                 .border(Color.black, width: 1.5)
                 
                 // COLUMN 2: TULIP DIAGRAM (Vector arrow & CAP heading in yellow)
-                TulipVectorView(tulip: note.tulip, isHighlighted: isCurrent)
+                TulipVectorView(tulip: note.tulip, isHighlighted: isCurrent, noteId: note.id)
                     .frame(width: 110, height: 95)
                     .border(Color.black, width: 1.5)
                 

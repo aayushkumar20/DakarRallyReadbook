@@ -18,8 +18,16 @@
     <!-- Top Cockpit Navigation Bar -->
     <header class="cockpit-header">
       <div class="brand">
-        <span class="flag-icon">🏁</span>
-        <span class="brand-title">DAKAR RALLY RAID</span>
+        <!-- Official Dakar Tuareg Silhouette Logo -->
+        <svg class="dakar-tuareg-logo" width="34" height="34" viewBox="0 0 100 100" fill="none">
+          <path d="M50 5 C75 5 88 15 85 28 C82 40 80 55 72 65 C75 75 85 85 88 95 L12 95 C15 85 25 75 28 65 C20 55 18 40 15 28 C12 15 25 5 50 5 Z" fill="#FFE500"/>
+          <!-- Eyes cut -->
+          <polygon points="32,40 68,40 65,47 35,47" fill="#000"/>
+          <!-- Veil folds -->
+          <path d="M30 57 Q50 64 70 57" stroke="#000" stroke-width="3" fill="none"/>
+          <path d="M25 74 Q50 82 75 74" stroke="#000" stroke-width="3" fill="none"/>
+        </svg>
+        <span class="brand-title">DAKAR RALLY</span>
         <span class="cert-tag">FIA 2025</span>
       </div>
 
@@ -62,8 +70,8 @@
       <section class="device-section" id="unik4Section">
         <div class="unik4-hardware-frame">
           <div class="hardware-top-plate">
-            <span class="device-label">MEMO GPS UNIK4 RALLYE RAID – VERSION 2024</span>
-            <span class="category-label">AUTO/CAMION / MOTO</span>
+            <span class="device-label">🇫🇷 MEMO GPS UNIK4 RALLYE RAID – VERSION 2024</span>
+            <span class="category-label">AUTO/CAMION</span>
             <div class="power-led" id="powerLed" title="GPS Lock Status"></div>
           </div>
 
@@ -152,6 +160,13 @@
                   <span class="dtw-unit">km</span>
                 </div>
               </div>
+            </div>
+
+            <!-- Row 3.5: UNIK4 Screen Footer (Screenshot 1) -->
+            <div class="screen-row unik4-footer-bar">
+              <span class="foot-left" id="telemNextDist">NEXT 1.22</span>
+              <span class="foot-mid">EZ AUT SS - 456.74 km</span>
+              <span class="foot-right" id="telemFootCap">Cap 32°</span>
             </div>
 
             <!-- Row 4: Live GPS Coordinates, Elevation & Slope -->

@@ -14,7 +14,9 @@
 		46DE9F470014F5E904FA3CBD /* RemoteControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8E297042840AB8190E2091 /* RemoteControlView.swift */; };
 		4A6A6BCB872273B07BF2BA7C /* SoundEffectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAD39AFAEA06F054A768B90 /* SoundEffectManager.swift */; };
 		4E59BFC6F9D63CE2808B3913 /* LexiconReferenceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E104AF576EB304B51C991DE2 /* LexiconReferenceSheet.swift */; };
+		64C1EFA4C6228F7E54BCF531 /* DakarLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1DD72DCF1846448328B788 /* DakarLogoView.swift */; };
 		778DFCDF8411D01600B4A97D /* FIALexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB479B0A68B9437283DBC8 /* FIALexicon.swift */; };
+		788C7B86A64775BCCA79F3C6 /* FIASymbolIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17B8A56A7EB416F0209B2AA /* FIASymbolIcons.swift */; };
 		8229216E80E29CD86A360C6E /* RoadbookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6684F11EDA171AE4ABA25F /* RoadbookListView.swift */; };
 		974AF598A5148D7D399807B1 /* DakarRallyRoadbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C1BBEC20E53094CCCBFAF /* DakarRallyRoadbookApp.swift */; };
 		97745CCF12D8238EF5F3C0F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D907EDE00003F3B7B2CC32 /* ContentView.swift */; };
@@ -31,6 +33,7 @@
 		2C724753D5548553B9661CA9 /* AppleMapViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapViewRepresentable.swift; sourceTree = "<group>"; };
 		367673101A2D6C78A6D7BF6A /* Unik4GPSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unik4GPSView.swift; sourceTree = "<group>"; };
 		48BB479B0A68B9437283DBC8 /* FIALexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIALexicon.swift; sourceTree = "<group>"; };
+		4C1DD72DCF1846448328B788 /* DakarLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DakarLogoView.swift; sourceTree = "<group>"; };
 		524485D15A48BFCF5E6E1E85 /* FIASymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIASymbolView.swift; sourceTree = "<group>"; };
 		66D907EDE00003F3B7B2CC32 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6AFA0687C9199DA1065DAD1C /* AppleMapKitRouteEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapKitRouteEngine.swift; sourceTree = "<group>"; };
@@ -41,6 +44,7 @@
 		C91C7094216D179F639481AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CD8E297042840AB8190E2091 /* RemoteControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteControlView.swift; sourceTree = "<group>"; };
 		E104AF576EB304B51C991DE2 /* LexiconReferenceSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexiconReferenceSheet.swift; sourceTree = "<group>"; };
+		E17B8A56A7EB416F0209B2AA /* FIASymbolIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIASymbolIcons.swift; sourceTree = "<group>"; };
 		FB8F95DA21568453F5AFBF89 /* TulipVectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TulipVectorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +93,8 @@
 			children = (
 				2C724753D5548553B9661CA9 /* AppleMapViewRepresentable.swift */,
 				66D907EDE00003F3B7B2CC32 /* ContentView.swift */,
+				4C1DD72DCF1846448328B788 /* DakarLogoView.swift */,
+				E17B8A56A7EB416F0209B2AA /* FIASymbolIcons.swift */,
 				524485D15A48BFCF5E6E1E85 /* FIASymbolView.swift */,
 				E104AF576EB304B51C991DE2 /* LexiconReferenceSheet.swift */,
 				CD8E297042840AB8190E2091 /* RemoteControlView.swift */,
@@ -166,9 +172,11 @@
 				AE5D33083D4A7FF95876D499 /* AppleMapKitRouteEngine.swift in Sources */,
 				DAC333B72C59A9A73DB04098 /* AppleMapViewRepresentable.swift in Sources */,
 				97745CCF12D8238EF5F3C0F8 /* ContentView.swift in Sources */,
+				64C1EFA4C6228F7E54BCF531 /* DakarLogoView.swift in Sources */,
 				3925B4CB52394BD5FF8D7B7B /* DakarModels.swift in Sources */,
 				974AF598A5148D7D399807B1 /* DakarRallyRoadbookApp.swift in Sources */,
 				778DFCDF8411D01600B4A97D /* FIALexicon.swift in Sources */,
+				788C7B86A64775BCCA79F3C6 /* FIASymbolIcons.swift in Sources */,
 				075429B1B40CA81FF11B7EB2 /* FIASymbolView.swift in Sources */,
 				4E59BFC6F9D63CE2808B3913 /* LexiconReferenceSheet.swift in Sources */,
 				DDFBCAE8A9D980378F46EE0A /* LocationService.swift in Sources */,

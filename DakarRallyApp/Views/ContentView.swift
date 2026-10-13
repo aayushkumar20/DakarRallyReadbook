@@ -20,14 +20,8 @@ public struct ContentView: View {
         VStack(spacing: 0) {
             // Top Cockpit Bar
             HStack(spacing: 8) {
-                // Dakar Logo & Title
-                HStack(spacing: 4) {
-                    Image(systemName: "flag.checkered.2.crossed")
-                        .foregroundColor(Color(red: 1.0, green: 0.92, blue: 0.15))
-                    Text("DAKAR RALLY")
-                        .font(.system(size: 13, weight: .black, design: .monospaced))
-                        .foregroundColor(.white)
-                }
+                // Official Dakar Tuareg Brand Logo
+                DakarLogoView(size: 26, showText: true)
                 
                 Spacer()
                 
