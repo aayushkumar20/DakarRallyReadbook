@@ -1101,7 +1101,25 @@ body.mode-map .device-section,
 body.mode-map .roadbook-section {
   display: none !important;
 }
-@media (max-width: 900px) {
+@media (max-width: 600px) {
+  .cockpit-header {
+    height: 44px;
+    padding: 0 6px;
+  }
+  .brand-title, .cert-tag {
+    display: none;
+  }
+  .mode-btn {
+    padding: 5px 6px;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+  .action-btn {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+}
+@media (max-width: 900px) and (orientation: portrait) {
   .main-workspace {
     flex-direction: column;
   }
@@ -1115,5 +1133,17 @@ body.mode-map .roadbook-section {
   }
   .map-section {
     display: none;
+  }
+}
+@media (min-width: 600px) and (max-width: 1024px), (screen-spanning: single-fold-vertical) {
+  .main-workspace {
+    flex-direction: row;
+  }
+  .device-section {
+    width: 48%;
+    min-width: 320px;
+  }
+  .roadbook-section {
+    width: 52%;
   }
 }
