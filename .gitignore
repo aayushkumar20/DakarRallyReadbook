@@ -2,6 +2,7 @@ build/
 DerivedData/
 *.xcworkspace/xcuserdata
 *.xcodeproj/xcuserdata
+xcuserdata/
 .DS_Store
 .hvigor/
 *.hvd/
