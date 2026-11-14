@@ -82,13 +82,19 @@ An authentic replica of the **Dakar Rally ERTF Unik4 GPS Navigation Instrument C
 - `+0.10` / `-0.10`: Calibrates total odometer.
 - `NOTE +` / `NOTE -`: Advances or rewinds active roadbook note.
 
-### 6. Automated CI/CD, IPA Build & Release Pipeline
-- GitHub Actions workflow (`.github/workflows/ci.yml`) automatically:
+### 6. Automated CI/CD, IPA & HarmonyOS HAP Pipelines
+- **iOS CI/CD Pipeline** (`.github/workflows/ci.yml`):
   - Validates code quality and syntax.
   - Builds and archives the iOS application on `macos-15` runner with Xcode 16.
   - Packages and exports the unsigned `DakarRallyApp.ipa` binary artifact.
   - Automatically attaches `DakarRallyApp.ipa` to GitHub Releases for direct download.
   - Deploys the interactive web companion directly to GitHub Pages (`gh-pages`).
+- **Huawei HarmonyOS Self-Hosted Pipeline** (`.github/workflows/harmonyos.yml`):
+  - Uses your local macOS machine as a GitHub self-hosted runner (`runs-on: [self-hosted, macOS]`).
+  - Automatically configures the Huawei OpenHarmony registry (`repo.harmonyos.com`).
+  - Compiles ArkTS and builds the HarmonyOS Ability Package (`entry-default-unsigned.hap`) using local DevEco Studio and `hvigorw`.
+  - Automatically uploads the `.hap` artifact to GitHub Actions runs and releases.
+  - Quick setup script: `./scripts/setup-macos-runner.sh`.
 
 ---
 

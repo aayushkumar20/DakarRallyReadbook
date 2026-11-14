@@ -8,4 +8,6 @@ xcuserdata/
 *.hvd/
 .idea/
 .gradle/
+oh_modules/
+.cxx/
 

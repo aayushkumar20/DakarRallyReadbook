@@ -12,6 +12,9 @@ struct Index {
   @State activeNoteIndex: number = 0;
   @State viewMode: string = 'split'; // 'split' | 'unik4' | 'roadbook'
 
+  @State totalOdoKM: number = 12.40;
+  @State partialOdoKM: number = 12.40;
+
   @State telemetry: TelemetryData = {
     speedKmh: 78.4,
     speedUnit: 'km/h',
@@ -46,8 +49,11 @@ struct Index {
     // Start chrono and simulation ticker
     this.timerId = setInterval(() => {
       this.telemetry.elapsedSeconds += 1;
-      this.telemetry.totalOdoKM += (this.telemetry.speedKmh / 3600);
-      this.telemetry.partialOdoKM += (this.telemetry.speedKmh / 3600);
+      const delta = (this.telemetry.speedKmh / 3600);
+      this.totalOdoKM += delta;
+      this.partialOdoKM += delta;
+      this.telemetry.totalOdoKM = this.totalOdoKM;
+      this.telemetry.partialOdoKM = this.partialOdoKM;
       if (this.telemetry.elapsedSeconds > 0) {
         this.telemetry.avgSpeedKmh = this.telemetry.totalOdoKM / (this.telemetry.elapsedSeconds / 3600);
       }
@@ -156,8 +162,8 @@ struct Index {
 
       // Bottom Télécommande Remote Bar
       RemoteControlBar({
-        totalOdo: $telemetry.totalOdoKM,
-        partialOdo: $telemetry.partialOdoKM,
+        totalOdo: $totalOdoKM,
+        partialOdo: $partialOdoKM,
         currentNoteIndex: $activeNoteIndex
       })
     }
