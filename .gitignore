@@ -3,3 +3,8 @@ DerivedData/
 *.xcworkspace/xcuserdata
 *.xcodeproj/xcuserdata
 .DS_Store
+.hvigor/
+*.hvd/
+.idea/
+.gradle/
+

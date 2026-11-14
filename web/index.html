@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Dakar Rally ERTF Unik4 & Digital Roadbook</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#FFE500">
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -320,6 +324,12 @@
             <button class="lex-cat-btn" data-cat="waypoints">WAYPOINTS</button>
             <button class="lex-cat-btn" data-cat="directions">DIRECTIONS</button>
             <button class="lex-cat-btn" data-cat="specificities">TERRAIN</button>
+            <button class="lex-cat-btn" data-cat="electric">ELECTRIC</button>
+          </div>
+
+          <div class="lexicon-search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="lexiconSearchInput" placeholder="Search signs, symbols, acronyms or names (e.g. HP, Dunes, Danger, DZ, River)..." />
           </div>
 
           <div class="lexicon-grid-container" id="lexiconGrid">
@@ -331,5 +341,12 @@
   </div>
 
   <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
+  </script>
 </body>
 </html>

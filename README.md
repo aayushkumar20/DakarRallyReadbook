@@ -92,9 +92,9 @@ An authentic replica of the **Dakar Rally ERTF Unik4 GPS Navigation Instrument C
 
 ---
 
-## 🚀 Running the Project
+## 🚀 Running the Project on All 4 Platforms
 
-### 📱 Native iOS App (Xcode / Swift / SwiftUI)
+### 1. 🍏 Native iOS App (Apple — Xcode / Swift / SwiftUI)
 The project includes an Xcode configuration built for iOS 17+.
 
 ```bash
@@ -107,10 +107,39 @@ To build via CLI:
 xcodebuild -project DakarRallyApp.xcodeproj -scheme DakarRallyApp -destination 'platform=iOS Simulator,name=iPhone 17' build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 ```
 
-### 💻 Web / Browser Companion & GitHub Pages
+### 2. 🔴 Huawei HarmonyOS (Huawei — DevEco Studio / ArkTS / ArkUI)
+Native HarmonyOS NEXT / OpenHarmony application located in `harmonyos/`.
+
+- Open `harmonyos/` in **Huawei DevEco Studio** (v4.0+ / v5.0+).
+- Run on Huawei phone, tablet, or foldable simulator/device.
+- Supports ArkUI declarative components, Unik4 telemetry cluster, 3-column FIA roadbook table with canvas tulip diagrams, FIA symbol badges, and remote control.
+
+To build via CLI with Hvigor:
+```bash
+cd harmonyos
+hvigorw assembleHap
+```
+
+### 3. 🤖 Android App (Google — Android Studio / Kotlin / Jetpack Compose)
+Modern native Android application located in `android/`.
+
+- Open `android/` in **Android Studio** (Koala / Ladybug+).
+- Built with Jetpack Compose, Material3, and Kotlin 2.0.
+- Includes complete Unik4 telemetry dashboard, 3-column roadbook with Canvas tulip vectors, FIA lexicon dialog with search, and Dakar remote control.
+
+To build via CLI:
+```bash
+cd android
+./gradlew assembleDebug
+```
+
+### 4. 🌐 Web Companion & Progressive Web App (Desktop & Mobile Browser)
+Interactive PWA companion located in `web/`.
+
 Run locally:
 ```bash
 python3 -m http.server 8088 --directory web
 ```
 Visit `http://localhost:8088`.
-Live version is deployed at [https://aayushkumar20.github.io/DakarRallyReadbook/](https://aayushkumar20.github.io/DakarRallyReadbook/).
+- Live version is deployed at [https://aayushkumar20.github.io/DakarRallyReadbook/](https://aayushkumar20.github.io/DakarRallyReadbook/).
+- Fully installable as a standalone PWA on Android, iOS, Huawei HarmonyOS browser, Windows, and macOS with offline caching.

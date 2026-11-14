@@ -1,0 +1,12 @@
+{
+  "name": "dakar-rally-roadbook-harmony",
+  "version": "1.0.0",
+  "description": "Dakar Rally ERTF Unik4 & Digital Roadbook for Huawei HarmonyOS",
+  "main": "",
+  "author": "Google Deepmind & Dakar Developers",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ohos/hvigor": "3.1.2",
+    "@ohos/hvigor-ohos-plugin": "3.1.2"
+  }
+}

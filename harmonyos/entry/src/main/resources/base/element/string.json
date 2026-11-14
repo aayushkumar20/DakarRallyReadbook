@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "Dakar Rally ERTF Unik4 GPS and Digital Roadbook Module"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "Dakar Rally Navigation Ability"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "Dakar Roadbook"
+    },
+    {
+      "name": "location_permission_reason",
+      "value": "Required for live GPS telemetry, speed calculation and waypoint navigation"
+    }
+  ]
+}

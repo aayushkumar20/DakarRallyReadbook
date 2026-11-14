@@ -1,0 +1,16 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#000000"
+    },
+    {
+      "name": "dakar_yellow",
+      "value": "#FFE500"
+    },
+    {
+      "name": "dakar_dark",
+      "value": "#121316"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Main Feature Module for Dakar Rally HarmonyOS Application",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {}
+}

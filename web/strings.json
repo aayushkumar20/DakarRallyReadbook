@@ -39,7 +39,17 @@
     "point_b": "Point B (Destination):",
     "find_routes": "⚡ FIND ALTERNATIVE ROUTES",
     "select_route": "SELECT PREFERRED ROUTE:",
-    "generate_roadbook": "⚡ GENERATE ROADBOOK FOR SELECTED ROUTE"
+    "generate_roadbook": "⚡ GENERATE ROADBOOK FOR SELECTED ROUTE",
+    "search_lexicon": "Search signs, symbols, acronyms or names (e.g. HP, Dunes, Danger, DZ, River)...",
+    "cat_all": "ALL",
+    "cat_tracks": "TRACKS",
+    "cat_elements": "ELEMENTS",
+    "cat_areas": "AREAS",
+    "cat_safety": "SAFETY / DANGERS",
+    "cat_waypoints": "WAYPOINTS",
+    "cat_directions": "DIRECTIONS",
+    "cat_specificities": "TERRAIN",
+    "cat_electric": "ELECTRIC"
   },
   "fr": {
     "brand_title": "RALLYE DAKAR",
@@ -81,7 +91,17 @@
     "point_b": "Point B (Destination):",
     "find_routes": "⚡ TROUVER LES PISTES ALTERNATIVES",
     "select_route": "CHOISIR LA PISTE:",
-    "generate_roadbook": "⚡ GÉNÉRER LE ROADBOOK POUR CETTE PISTE"
+    "generate_roadbook": "⚡ GÉNÉRER LE ROADBOOK POUR CETTE PISTE",
+    "search_lexicon": "Rechercher des symboles, acronymes ou noms (ex: HP, Dunes, Danger, DZ, Rio)...",
+    "cat_all": "TOUT",
+    "cat_tracks": "PISTES",
+    "cat_elements": "ÉLÉMENTS",
+    "cat_areas": "ZONES",
+    "cat_safety": "SÉCURITÉ / DANGERS",
+    "cat_waypoints": "POINTS DE PASSAGE",
+    "cat_directions": "DIRECTIONS",
+    "cat_specificities": "TERRAIN",
+    "cat_electric": "ÉLECTRIQUE"
   },
   "es": {
     "brand_title": "RALLY DAKAR",
@@ -123,7 +143,17 @@
     "point_b": "Punto B (Destino):",
     "find_routes": "⚡ BUSCAR RUTAS ALTERNATIVAS",
     "select_route": "SELECCIONAR RUTA:",
-    "generate_roadbook": "⚡ GENERAR ROADBOOK DE RUTA ELEGIDA"
+    "generate_roadbook": "⚡ GENERAR ROADBOOK DE RUTA ELEGIDA",
+    "search_lexicon": "Buscar símbolos, acrónimos o nombres (ej. HP, Dunas, Peligro, DZ, Río)...",
+    "cat_all": "TODO",
+    "cat_tracks": "PISTAS",
+    "cat_elements": "ELEMENTOS",
+    "cat_areas": "ÁREAS",
+    "cat_safety": "SEGURIDAD / PELIGROS",
+    "cat_waypoints": "WAYPOINTS",
+    "cat_directions": "DIRECCIONES",
+    "cat_specificities": "TERRENO",
+    "cat_electric": "ELÉCTRICO"
   },
   "ar": {
     "brand_title": "رالي داكار",
@@ -165,7 +195,17 @@
     "point_b": "نقطة الوصول:",
     "find_routes": "⚡ البحث عن مسارات بديلة",
     "select_route": "اختر المسار:",
-    "generate_roadbook": "⚡ إنشاء كتيب المسار"
+    "generate_roadbook": "⚡ إنشاء كتيب المسار",
+    "search_lexicon": "ابحث عن العلامات والرموز والأسماء (مثل HP، الكثبان، الخطر، DZ، الوادي)...",
+    "cat_all": "الكل",
+    "cat_tracks": "المسارات",
+    "cat_elements": "العناصر",
+    "cat_areas": "المناطق",
+    "cat_safety": "الأمان / الأخطار",
+    "cat_waypoints": "نقاط المرور",
+    "cat_directions": "الاتجاهات",
+    "cat_specificities": "التضاريس",
+    "cat_electric": "الكهرباء"
   },
   "pt": {
     "brand_title": "RALI DAKAR",
@@ -207,7 +247,17 @@
     "point_b": "Ponto B (Destino):",
     "find_routes": "⚡ ENCONTRAR ROTAS ALTERNATIVAS",
     "select_route": "SELECIONAR ROTA:",
-    "generate_roadbook": "⚡ GERAR ROADBOOK"
+    "generate_roadbook": "⚡ GERAR ROADBOOK",
+    "search_lexicon": "Pesquisar sinais, símbolos, siglas ou nomes (ex: HP, Dunas, Perigo, DZ, Rio)...",
+    "cat_all": "TODOS",
+    "cat_tracks": "PISTAS",
+    "cat_elements": "ELEMENTOS",
+    "cat_areas": "ÁREAS",
+    "cat_safety": "SEGURANÇA / PERIGOS",
+    "cat_waypoints": "PONTOS DE PASSAGEM",
+    "cat_directions": "DIREÇÕES",
+    "cat_specificities": "TERRENO",
+    "cat_electric": "ELÉTRICO"
   },
   "de": {
     "brand_title": "RALLYE DAKAR",
@@ -249,7 +299,17 @@
     "point_b": "Punkt B (Ziel):",
     "find_routes": "⚡ ALTERNATIVE ROUTEN FINDEN",
     "select_route": "ROUTE AUSWÄHLEN:",
-    "generate_roadbook": "⚡ ROADBOOK GENERIEREN"
+    "generate_roadbook": "⚡ ROADBOOK GENERIEREN",
+    "search_lexicon": "Zeichen, Symbole, Akronyme oder Namen suchen (z. B. HP, Dünen, Gefahr, DZ, Fluss)...",
+    "cat_all": "ALLE",
+    "cat_tracks": "PISTEN",
+    "cat_elements": "ELEMENTE",
+    "cat_areas": "BEREICHE",
+    "cat_safety": "SICHERHEIT / GEFAHREN",
+    "cat_waypoints": "WEGPUNKTE",
+    "cat_directions": "RICHTUNGEN",
+    "cat_specificities": "GELÄNDE",
+    "cat_electric": "ELEKTRISCH"
   },
   "it": {
     "brand_title": "DAKAR RALLY",
@@ -291,7 +351,17 @@
     "point_b": "Punto B (Destinazione):",
     "find_routes": "⚡ TROVA PERCORSI ALTERNATIVI",
     "select_route": "SELEZIONA PERCORSO:",
-    "generate_roadbook": "⚡ GENERA ROADBOOK"
+    "generate_roadbook": "⚡ GENERA ROADBOOK",
+    "search_lexicon": "Cerca segnali, simboli, acronimi o nomi (es. HP, Dune, Pericolo, DZ, Fiume)...",
+    "cat_all": "TUTTO",
+    "cat_tracks": "PISTE",
+    "cat_elements": "ELEMENTI",
+    "cat_areas": "AREE",
+    "cat_safety": "SICUREZZA / PERICOLI",
+    "cat_waypoints": "PUNTI DI PASSAGGIO",
+    "cat_directions": "DIREZIONI",
+    "cat_specificities": "TERRENO",
+    "cat_electric": "ELETTRICO"
   },
   "hi": {
     "brand_title": "डकार रैली",
@@ -333,7 +403,17 @@
     "point_b": "गंतव्य बिंदु:",
     "find_routes": "⚡ वैकल्पिक मार्ग खोजें",
     "select_route": "पसंदीदा मार्ग चुनें:",
-    "generate_roadbook": "⚡ रोडबुक बनाएं"
+    "generate_roadbook": "⚡ रोडबुक बनाएं",
+    "search_lexicon": "संकेत, प्रतीक, संक्षिप्त नाम या विवरण खोजें (उदा: HP, टिब्बा, खतरा, DZ, नदी)...",
+    "cat_all": "सभी",
+    "cat_tracks": "ट्रैक",
+    "cat_elements": "तत्व",
+    "cat_areas": "क्षेत्र",
+    "cat_safety": "सुरक्षा / खतरे",
+    "cat_waypoints": "वेपॉइंट",
+    "cat_directions": "दिशा-निर्देश",
+    "cat_specificities": "भूभाग",
+    "cat_electric": "विद्युत"
   },
   "ja": {
     "brand_title": "ダカールラリー",
@@ -375,7 +455,17 @@
     "point_b": "目的地:",
     "find_routes": "⚡ 代替ルートを検索",
     "select_route": "希望ルートを選択:",
-    "generate_roadbook": "⚡ ロードブックを生成"
+    "generate_roadbook": "⚡ ロードブックを生成",
+    "search_lexicon": "標識、記号、略語、名称を検索（例：HP、砂丘、危険、DZ、河川）...",
+    "cat_all": "すべて",
+    "cat_tracks": "トラック",
+    "cat_elements": "障害物・要素",
+    "cat_areas": "エリア",
+    "cat_safety": "安全・危険警告",
+    "cat_waypoints": "通過地点",
+    "cat_directions": "進路指示",
+    "cat_specificities": "地形特性",
+    "cat_electric": "電信・送電"
   },
   "zh": {
     "brand_title": "达喀尔拉力赛",
@@ -417,6 +507,16 @@
     "point_b": "终点:",
     "find_routes": "⚡ 查找备选赛道路线",
     "select_route": "选择首选路线:",
-    "generate_roadbook": "⚡ 生成达喀尔路书"
+    "generate_roadbook": "⚡ 生成达喀尔路书",
+    "search_lexicon": "搜索标志、符号、缩写或名称（如：HP、沙丘、危险、DZ、干河床）...",
+    "cat_all": "全部",
+    "cat_tracks": "赛道类型",
+    "cat_elements": "地标地物",
+    "cat_areas": "管制区域",
+    "cat_safety": "安全与危险",
+    "cat_waypoints": "航点导航",
+    "cat_directions": "行进方向",
+    "cat_specificities": "特殊地形",
+    "cat_electric": "电力设施"
   }
 }

@@ -618,6 +618,14 @@ body {
 .note-row td:last-child {
   border-right: none;
 }
+.wpt-name-tag {
+  font-size: 10px;
+  font-weight: 900;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 3px;
+}
 .cell-distance {
   display: flex;
   flex-direction: column;
@@ -670,10 +678,12 @@ body {
   background: var(--dakar-yellow);
   color: #000;
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 900;
-  padding: 1px 5px;
+  padding: 2px 6px;
   border: 1.2px solid #000;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
 }
 .cell-lexicon {
   display: flex;
@@ -685,27 +695,52 @@ body {
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-wrap: wrap;
 }
 .wpt-stamp {
-  width: 26px;
+  min-width: 26px;
   height: 26px;
+  padding: 0 4px;
   border: 1.5px solid #000;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 8px;
+  font-size: 7.5px;
   font-weight: 900;
+  background: #FFF;
+  color: #000;
+  text-align: center;
+}
+.wpt-stamp.start {
+  background: #000;
+  color: #FFE500;
+  border-color: #000;
+}
+.wpt-stamp.finish {
+  background: #000;
+  color: #FFF;
+  border: 2px solid #000;
 }
 .wpt-stamp.dz {
   background: var(--dakar-green);
   color: #FFF;
   border-color: var(--dakar-green);
 }
+.wpt-stamp.fz {
+  background: #607D8B;
+  color: #FFF;
+  border-color: #455A64;
+}
 .wpt-stamp.cp {
   border-color: var(--dakar-purple);
   color: var(--dakar-purple);
   border-width: 2px;
+}
+.wpt-stamp.wpc, .wpt-stamp.wps, .wpt-stamp.wpm {
+  background: #FFF;
+  color: #000;
+  border: 1.8px solid #000;
 }
 .speed-circle {
   width: 26px;
@@ -719,6 +754,7 @@ body {
   font-weight: 900;
   color: #000;
   background: #FFF;
+  flex-shrink: 0;
 }
 .danger-marks {
   font-family: 'Times New Roman', serif;
@@ -726,6 +762,21 @@ body {
   font-weight: 900;
   color: var(--dakar-red);
   line-height: 1;
+  letter-spacing: -1px;
+}
+.fia-symbol-svg {
+  width: 26px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.fia-symbol-ruts {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 900;
+  color: #000;
+  line-height: 1;
+  letter-spacing: 2px;
 }
 .lex-codes-tags {
   display: flex;
@@ -734,18 +785,36 @@ body {
 }
 .lex-tag {
   font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 900;
-  padding: 1px 5px;
-  border-radius: 2px;
-  border: 1px solid #000;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid #222;
   background: #EEE;
   color: #000;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1.2;
 }
-.lex-tag.hp { background: #FFE0B2; }
-.lex-tag.sa, .lex-tag.dn { background: #FFF9C4; }
-.lex-tag.dz { background: #C8E6C9; }
-.lex-tag.fz { background: #CFD8DC; }
+.lex-tag-code {
+  font-weight: 900;
+  letter-spacing: 0.3px;
+}
+.lex-tag-label {
+  font-family: var(--font-sans);
+  font-size: 9.5px;
+  font-weight: 600;
+  color: #222;
+}
+.lex-tag.hp { background: #FFE0B2; border-color: #E65100; }
+.lex-tag.sa, .lex-tag.dn { background: #FFF9C4; border-color: #FBC02D; }
+.lex-tag.dz { background: #C8E6C9; border-color: #2E7D32; }
+.lex-tag.fz { background: #CFD8DC; border-color: #546E7A; }
+.lex-tag.pp { background: #BBDEFB; border-color: #1976D2; }
+.lex-tag.cp { background: #E1BEE7; border-color: #7B1FA2; }
+.lex-tag.danger { background: #FFCDD2; border-color: #C62828; }
+.lex-tag.specificities { background: #FFE082; border-color: #FFA000; }
 .instruction-text {
   font-size: 10px;
   font-weight: 800;
@@ -1089,43 +1158,121 @@ body {
   color: #000;
   border-color: var(--dakar-yellow);
 }
-.lexicon-grid {
+.lexicon-search-bar {
+  display: flex;
+  align-items: center;
+  background: #171920;
+  border: 1.5px solid #2F3442;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 10px 0 14px 0;
+  gap: 10px;
+}
+.lexicon-search-bar:focus-within {
+  border-color: var(--dakar-yellow);
+}
+.lexicon-search-bar .search-icon {
+  font-size: 14px;
+}
+.lexicon-search-bar input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #FFF;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+}
+.lexicon-search-bar input::placeholder {
+  color: #6B7280;
+}
+.lexicon-grid, .lexicon-grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 8px;
+  max-height: 440px;
+  overflow-y: auto;
+  padding-right: 4px;
 }
 .lexicon-card-item {
-  background: #121317;
-  border: 1px solid #2B2E38;
-  padding: 8px;
+  background: #14171E;
+  border: 1px solid #2B303C;
+  padding: 8px 10px;
   border-radius: 6px;
   display: flex;
   align-items: center;
   gap: 10px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.lexicon-card-item:hover {
+  border-color: var(--dakar-yellow);
+  background: #181C25;
+}
+.lex-item-icon-box {
+  width: 42px;
+  height: 42px;
+  background: #FFF;
+  border: 1.5px solid #000;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 .lex-item-code {
   background: var(--dakar-yellow);
   color: #000;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 900;
-  padding: 3px 6px;
+  padding: 3px 5px;
   border: 1px solid #000;
-  min-width: 45px;
+  min-width: 44px;
   text-align: center;
+  flex-shrink: 0;
 }
 .lex-item-names {
   display: flex;
   flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+.lex-name-local {
+  font-size: 12px;
+  font-weight: 800;
+  color: #FFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .lex-name-en {
-  font-size: 12px;
-  font-weight: 700;
-  color: #FFF;
+  font-size: 11px;
+  font-weight: 600;
+  color: #BBB;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .lex-name-fr {
   font-size: 10px;
-  color: #888;
+  font-style: italic;
+  color: #777;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lex-item-cat {
+  font-size: 8.5px;
+  font-weight: 800;
+  background: #252834;
+  color: #AAA;
+  padding: 2px 5px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  align-self: flex-start;
 }
 body.mode-unik4 .roadbook-section,
 body.mode-unik4 .map-section {

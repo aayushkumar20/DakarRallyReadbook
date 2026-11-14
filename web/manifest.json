@@ -1,0 +1,22 @@
+{
+  "name": "Dakar Rally ERTF Unik4 & Roadbook",
+  "short_name": "Dakar Roadbook",
+  "description": "Authentic FIA Dakar Rally ERTF Unik4 GPS Navigation Instrument Cluster & Digital Roadbook",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#000000",
+  "theme_color": "#FFE500",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
