@@ -10,4 +10,5 @@ xcuserdata/
 .gradle/
 oh_modules/
 .cxx/
+.preview/
 
